@@ -1,4 +1,4 @@
-package Daos;
+package pe.edu.pucp.iweb.lab9.lab9_grupo9.Daos;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
