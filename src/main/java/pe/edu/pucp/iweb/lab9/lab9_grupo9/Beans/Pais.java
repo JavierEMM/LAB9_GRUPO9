@@ -4,6 +4,15 @@ public class Pais {
     private String nombre;
     private String continente;
     private double tamano;
+    private int cantidadPoblacion;
+
+    public int getCantidadPoblacion() {
+        return cantidadPoblacion;
+    }
+
+    public void setCantidadPoblacion(int cantidadPoblacion) {
+        this.cantidadPoblacion = cantidadPoblacion;
+    }
 
     public String getNombre() {
         return nombre;
