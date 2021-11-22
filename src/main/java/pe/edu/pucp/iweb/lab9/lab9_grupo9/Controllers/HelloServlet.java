@@ -1,4 +1,4 @@
-package pe.edu.pucp.iweb.lab9.lab9_grupo9;
+package pe.edu.pucp.iweb.lab9.lab9_grupo9.Controllers;
 
 import java.io.*;
 import javax.servlet.http.*;

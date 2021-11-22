@@ -17,6 +17,8 @@ public abstract class BaseDao {
         String url = "jdbc:mysql://localhost:3306/lab9?serverTimezone=America/Lima";
 
         return DriverManager.getConnection(url,user,pass);
-
     }
+
+
+
 }
