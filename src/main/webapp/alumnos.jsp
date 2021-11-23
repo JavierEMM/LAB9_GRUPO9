@@ -48,8 +48,8 @@
                                 <td><%=alumno.getCodigo()%></td>
                                 <td><%=alumno.getPromedioPonderado()%></td>
                                 <td><%=alumno.getCondicion()%></td>
-                                <!--td><a class="btn btn-primary" href="<%=request.getContextPath()%>/AlumnoServlet?action=editar&id=<%=alumno.getIdParticipante()%>"><span class="fa fa-edit"></span></a></td>
-                                <td><a class="btn btn-danger"  href="<%=request.getContextPath()%>/ParticipanteServlet?action=borrar&id=<%=alumno.getIdParticipante()%>"><span class="fa fa-trash"></span></a></td-->
+                                <td><a class="btn btn-primary" href="<%=request.getContextPath()%>/AlumnoServlet?action=editar&id=<%=alumno.getIdParticipante()%>"><span class="fa fa-edit"></span></a></td>
+                                <td><a class="btn btn-danger"  href="<%=request.getContextPath()%>/ParticipanteServlet?action=borrar&id=<%=alumno.getIdParticipante()%>"><span class="fa fa-trash"></span></a></td>
                             </tr>
                             <%}%>
                         </tbody>

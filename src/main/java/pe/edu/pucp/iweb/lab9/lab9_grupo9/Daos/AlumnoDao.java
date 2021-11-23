@@ -17,7 +17,7 @@ public class AlumnoDao extends  BaseDao {
             e.printStackTrace();
         }
 
-        String sentenciaSQL = "SELECT participante.nombre,participante.apellidos,participante.edad,alumno.codigo,alumno.promedio_ponderado,alumno.condicion FROM participante\n"+
+        String sentenciaSQL = "SELECT participante.nombre,participante.apellidos,participante.edad,alumno.codigo,alumno.promedio_ponderado,alumno.condicion,participante.idparticipante FROM participante\n"+
                 "INNER JOIN alumno ON (participante.idparticipante = alumno.participante_idparticipante)\n"+
                 "INNER JOIN universidad ON (alumno.universidad_iduniversidad = universidad.iduniversidad)\n"+
                 "WHERE universidad.iduniversidad = ?;";
@@ -34,7 +34,8 @@ public class AlumnoDao extends  BaseDao {
                     String promedioStr = rs.getString(5);
                     double promedio = Double.parseDouble(promedioStr);
                     String condicion = rs.getString(6);
-                    Alumno alumno = new Alumno(nombre,apellidos,edad,codigo,promedio,condicion);
+                    int idParticipante = rs.getInt(7);
+                    Alumno alumno = new Alumno(nombre,apellidos,edad,idParticipante,codigo,promedio,condicion);
                     listita.add(alumno);
                 }
             }
