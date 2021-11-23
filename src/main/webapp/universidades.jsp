@@ -15,7 +15,7 @@
     </jsp:include>
 
     <div class="mt-2 text-center">
-        <h1>Lista de Participantes</h1>
+        <h1>Lista de Universidades</h1>
     </div>
 
     <% if (mensaje.equalsIgnoreCase("corr")) { %>

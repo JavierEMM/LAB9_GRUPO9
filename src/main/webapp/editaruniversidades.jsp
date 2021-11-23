@@ -20,7 +20,7 @@
     </div>
     <div class="d-flex justify-content-center">
         <div class="w-75">
-            <form method="POST" action="<%=request.getContextPath()%>/ParticipanteServlet?action=editar&id=<%=universidad.getIdUniversidad()%>">
+            <form method="POST" action="<%=request.getContextPath()%>/UniversidadServlet?action=editar&id=<%=universidad.getIdUniversidad()%>">
                 <div class="form-group">
                     <label for="idUniversidad">ID Participante</label>
                     <input class="form-control" type="text" value="<%=universidad.getIdUniversidad()%>" disabled name="idUniversidad" id="idUniversidad">

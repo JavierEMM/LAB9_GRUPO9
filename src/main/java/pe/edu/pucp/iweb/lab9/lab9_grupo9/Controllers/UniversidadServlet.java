@@ -50,6 +50,7 @@ public class UniversidadServlet extends HttpServlet {
                         view.forward(request, response);
                     }
                 } catch (SQLException e) {
+                    System.out.println(e);
                     response.sendRedirect(request.getContextPath()+"/UniversidadServlet?msg=sql");
                 }
                 break;
