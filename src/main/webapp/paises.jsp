@@ -37,7 +37,7 @@
         <div class="w-75">
 
             <div class="my-2">
-                <a href="<%=request.getContextPath()%>/ParticipanteServlet?action=crear" class="btn btn-info">Añadir participante</a>
+                <a href="<%=request.getContextPath()%>/PaisServlet?action=crear" class="btn btn-info">Añadir Pais</a>
             </div>
 
             <table class="table table-dark table-transparent table-hover">

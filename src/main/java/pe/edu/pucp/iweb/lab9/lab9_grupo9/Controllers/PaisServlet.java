@@ -29,7 +29,7 @@ public class PaisServlet extends HttpServlet {
                 view = request.getRequestDispatcher("/editarPais.jsp");
                 view.forward(request, response);
                 break;
-            case "agregar":
+            case "crear":
                 ContinenteDao continenteDao = new ContinenteDao();
                 request.setAttribute("continentes",continenteDao.listarContinente());
                 view = request.getRequestDispatcher("/agregarPais.jsp");
@@ -62,7 +62,13 @@ public class PaisServlet extends HttpServlet {
                 paisDao.editarPais(nombre,poblacion,tamano,idPais);
                 response.sendRedirect(request.getContextPath()+"/PaisServlet");
                 break;
-            case "agregar":
+            case "crear":
+                String nombreAgregar = request.getParameter("nombrePais");
+                int idContinente = Integer.parseInt(request.getParameter("continente"));
+                int poblacionAgregar = Integer.parseInt(request.getParameter("poblacion"));
+                String tamanoAgregar = request.getParameter("tamano");
+                paisDao.añadirPais(nombreAgregar,poblacionAgregar,tamanoAgregar,idContinente);
+                response.sendRedirect(request.getContextPath()+"/PaisServlet");
                 break;
         }
     }
