@@ -7,8 +7,11 @@ public class Pais {
     private String tamano;
     private int cantidadPoblacion;
 
+    public Pais() {
+    }
+
     public Pais(int idPais,String nombre, String continente , String tamano, int cantidadPoblacion) {
-        this.idPais = idPais;
+        this.setIdPais(idPais);
         this.nombre = nombre;
         this.continente = continente;
         this.tamano = tamano;
@@ -45,5 +48,13 @@ public class Pais {
 
     public void setTamano(String tamano) {
         this.tamano = tamano;
+    }
+
+    public int getIdPais() {
+        return idPais;
+    }
+
+    public void setIdPais(int idPais) {
+        this.idPais = idPais;
     }
 }

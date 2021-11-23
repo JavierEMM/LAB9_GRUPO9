@@ -1,10 +1,23 @@
 package pe.edu.pucp.iweb.lab9.lab9_grupo9.Beans;
 
 public class Universidad {
+    private int idUniversidad;
     private String nombre;
-    private String pais;
-    private String ranking;
+    private Pais pais;
+    private int ranking;
     private int numeroAlumnos;
+
+    public Universidad() {
+    }
+    public Universidad(int idUniversidad,String nombre, Pais pais, int ranking, int numeroAlumnos, String foto) {
+        this.idUniversidad=idUniversidad;
+        this.nombre = nombre;
+        this.pais = pais;
+        this.ranking = ranking;
+        this.numeroAlumnos = numeroAlumnos;
+        this.foto = foto;
+    }
+
     private String foto;
 
     public String getNombre() {
@@ -48,5 +61,11 @@ public class Universidad {
     }
 
 
+    public int getIdUniversidad() {
+        return idUniversidad;
+    }
 
+    public void setIdUniversidad(int idUniversidad) {
+        this.idUniversidad = idUniversidad;
+    }
 }
