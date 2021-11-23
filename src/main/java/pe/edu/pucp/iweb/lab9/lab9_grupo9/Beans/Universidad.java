@@ -28,21 +28,6 @@ public class Universidad {
         this.nombre = nombre;
     }
 
-    public String getPais() {
-        return pais;
-    }
-
-    public void setPais(String pais) {
-        this.pais = pais;
-    }
-
-    public String getRanking() {
-        return ranking;
-    }
-
-    public void setRanking(String ranking) {
-        this.ranking = ranking;
-    }
 
     public int getNumeroAlumnos() {
         return numeroAlumnos;
@@ -68,4 +53,21 @@ public class Universidad {
     public void setIdUniversidad(int idUniversidad) {
         this.idUniversidad = idUniversidad;
     }
+
+    public Pais getPais() {
+        return pais;
+    }
+
+    public void setPais(Pais pais) {
+        this.pais = pais;
+    }
+
+    public int getRanking() {
+        return ranking;
+    }
+
+    public void setRanking(int ranking) {
+        this.ranking = ranking;
+    }
+
 }
