@@ -11,20 +11,13 @@ public class Pais {
     }
 
     public Pais(int idPais,String nombre, String continente , String tamano, int cantidadPoblacion) {
-        this.setIdPais(idPais);
+        this.idPais = idPais;
         this.nombre = nombre;
         this.continente = continente;
         this.tamano = tamano;
         this.cantidadPoblacion = cantidadPoblacion;
     }
 
-    public int getIdPais() {
-        return idPais;
-    }
-
-    public void setIdPais(int idPais) {
-        this.idPais = idPais;
-    }
 
     public int getCantidadPoblacion() {
         return cantidadPoblacion;

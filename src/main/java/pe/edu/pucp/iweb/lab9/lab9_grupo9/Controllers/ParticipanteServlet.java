@@ -75,6 +75,9 @@ public class ParticipanteServlet extends HttpServlet {
                 break;
 
             case "editar":
+                String idParticipanteStr = request.getParameter("id");
+                int idParticipante = Integer.parseInt(idParticipanteStr);
+
 
                 break;
 
