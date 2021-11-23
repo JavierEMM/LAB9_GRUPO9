@@ -280,7 +280,7 @@ public class ParticipanteDao{
         String sentenciaSQL = "SELECT p.nombre FROM participante\n"+
                                 "INNER JOIN pais p ON (participante.pais_idpais = p.idpais)\n"+
                                 "GROUP BY p.nombre\n"+
-                                "ORDER BY count(*) DESC\n"+
+                                "ORDER BY count(*) DESC, p.nombre\n"+
                                 "LIMIT 1;";
 
         try (Connection conn = DriverManager.getConnection(url, user, pass);

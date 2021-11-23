@@ -66,6 +66,7 @@ public class UniversidadServlet extends HttpServlet {
             case "borrar":
                 String idParticipante2 = request.getParameter("id");
                 break;
+
         }
 
 
@@ -125,6 +126,8 @@ public class UniversidadServlet extends HttpServlet {
                 } catch (SQLException e) {
                     response.sendRedirect(request.getContextPath() +"/UniversidadServlet?msg=sql");
                 }
+                break;
+
         }
 
     }

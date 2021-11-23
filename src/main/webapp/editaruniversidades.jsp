@@ -1,8 +1,10 @@
 <%@ page import="pe.edu.pucp.iweb.lab9.lab9_grupo9.Beans.Pais" %>
 <%@ page import="pe.edu.pucp.iweb.lab9.lab9_grupo9.Beans.Universidad" %>
+<%@ page import="pe.edu.pucp.iweb.lab9.lab9_grupo9.Beans.Alumno" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%Universidad universidad = request.getAttribute("universidad") != null ? (Universidad) request.getAttribute("universidad") : null;%>
 <jsp:useBean id="listaPaises" scope="request" type="java.util.ArrayList<pe.edu.pucp.iweb.lab9.lab9_grupo9.Beans.Pais>"/>
+<jsp:useBean id="listaAlumnosPorUniversidad" scope="request" type="java.util.ArrayList<pe.edu.pucp.iweb.lab9.lab9_grupo9.Beans.Alumno>" class="java.util.ArrayList"/>
 <jsp:useBean id="vista" scope="request" type="java.lang.String"/>
 
 <%if(vista.equals("editar")){%>
@@ -79,16 +81,16 @@
         <div class="w-75">
             <form method="POST" action="<%=request.getContextPath()%>/UniversidadServlet?action=crear">
                 <div class="form-group">
-                    <label for="nombreUniversidad">Nombre de la Universidad</label>
-                    <input class="form-control" type="text" name="nombreUniversidad" id="nombreUniversidad">
+                    <label for="nombreUniversidad1">Nombre de la Universidad</label>
+                    <input class="form-control" type="text" name="nombreUniversidad" id="nombreUniversidad1">
                 </div>
                 <div class="form-group">
-                    <label for="ranking">Ranking</label>
-                    <input class="form-control" type="text" name="ranking" id="ranking">
+                    <label for="ranking1">Ranking</label>
+                    <input class="form-control" type="text" name="ranking" id="ranking1">
                 </div>
                 <div class="form-group">
-                    <label for="Foto">Foto</label>
-                    <input class="form-control" type="text" name="Foto" id="Foto">
+                    <label for="Foto1">Foto</label>
+                    <input class="form-control" type="text" name="Foto" id="Foto1">
                 </div>
                 <div class="form-group">
                     <label>Pais</label>

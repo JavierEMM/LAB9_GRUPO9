@@ -1,5 +1,6 @@
 package pe.edu.pucp.iweb.lab9.lab9_grupo9.Daos;
 
+import pe.edu.pucp.iweb.lab9.lab9_grupo9.Beans.Alumno;
 import pe.edu.pucp.iweb.lab9.lab9_grupo9.Beans.Continente;
 import pe.edu.pucp.iweb.lab9.lab9_grupo9.Beans.Pais;
 import pe.edu.pucp.iweb.lab9.lab9_grupo9.Beans.Universidad;
@@ -123,4 +124,5 @@ public class UniversidadDao extends BaseDao{
             return true;
         }
     }
+
 }

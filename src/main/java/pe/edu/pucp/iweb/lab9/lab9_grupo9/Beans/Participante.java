@@ -8,6 +8,12 @@ public class Participante {
     private String nacionalidad;
     private String genero;
 
+    public Participante(String nombre, String apellido, int edad) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.edad = edad;
+    }
+
     public Participante(String nombre, String apellido, int edad, String nacionalidad, String genero, int idParticipante) {
         this.nombre = nombre;
         this.apellido = apellido;

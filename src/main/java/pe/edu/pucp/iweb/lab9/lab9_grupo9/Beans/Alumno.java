@@ -6,6 +6,14 @@ public class Alumno extends  Participante {
     private double promedioPonderado;
     private String condicion;
 
+    public Alumno(String nombre, String apellido, int edad,int codigo,double promedioPonderado,String condicion) {
+        super(nombre,apellido,edad);
+        this.codigo = codigo;
+        this.promedioPonderado = promedioPonderado;
+        this.condicion = condicion;
+    }
+
+
     public int getCodigo() {
         return codigo;
     }
