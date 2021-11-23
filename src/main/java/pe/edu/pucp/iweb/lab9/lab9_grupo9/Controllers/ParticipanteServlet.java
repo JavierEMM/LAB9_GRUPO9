@@ -27,10 +27,7 @@ public class ParticipanteServlet extends HttpServlet {
 
             case "crear":
 
-
-
                 break;
-
             case "editar":
                 String idParticipanteStr = request.getParameter("id");
                 int idParticipante = Integer.parseInt(idParticipanteStr);
