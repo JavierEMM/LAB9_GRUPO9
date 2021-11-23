@@ -1,12 +1,14 @@
 package pe.edu.pucp.iweb.lab9.lab9_grupo9.Beans;
 
 public class Pais {
+    private int idPais;
     private String nombre;
     private String continente;
     private String tamano;
     private int cantidadPoblacion;
 
-    public Pais(String nombre, String continente , String tamano, int cantidadPoblacion) {
+    public Pais(int idPais,String nombre, String continente , String tamano, int cantidadPoblacion) {
+        this.idPais = idPais;
         this.nombre = nombre;
         this.continente = continente;
         this.tamano = tamano;
