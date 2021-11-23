@@ -1,6 +1,7 @@
 package pe.edu.pucp.iweb.lab9.lab9_grupo9.Controllers;
 
 import pe.edu.pucp.iweb.lab9.lab9_grupo9.Daos.AlumnoDao;
+import pe.edu.pucp.iweb.lab9.lab9_grupo9.Daos.ParticipanteDao;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -11,7 +12,7 @@ import java.io.IOException;
 public class AlumnoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String accion = request.getParameter("action");
+        String accion = request.getParameter("action") == null ?  "mostrar": request.getParameter("action");
         RequestDispatcher view;
         AlumnoDao alumnoDao = new AlumnoDao();
         switch (accion){
@@ -39,7 +40,13 @@ public class AlumnoServlet extends HttpServlet {
 
 
                 break;
-
+            case "borrar":
+                String idAlumnoBorrar = request.getParameter("id");
+                alumnoDao.borrarAlumno(idAlumnoBorrar);
+                ParticipanteDao participanteDao = new ParticipanteDao();
+                participanteDao.borrarParticipante(Integer.parseInt(idAlumnoBorrar));
+                response.sendRedirect(request.getContextPath()+"/UniversidadServlet");
+                break;
         }
 
     }

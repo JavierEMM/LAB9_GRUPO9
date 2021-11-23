@@ -48,4 +48,16 @@ public class AlumnoDao extends  BaseDao {
         return listita;
     }
 
+    public void borrarAlumno(String idParticipante){
+        String sql = "DELETE FROM alumno WHERE participante_idparticipante = ?";
+        try(Connection conn = this.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+        ){
+            pstmt.setString(1,idParticipante);
+            pstmt.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
 }
