@@ -55,12 +55,12 @@
                         <%for(Participante participante : listaParticipantes){%>
                             <tr>
 
-                                <td><%=participante.getNombre()%> <%=participante.getApellido()%></td>
+                                <td><%=participante.getNombre()%><%=participante.getApellido()%></td>
                                 <td><%=participante.getEdad()%></td>
                                 <td><%=participante.getNacionalidad()%></td>
                                 <td><%=participante.getGenero()%></td>
-                                <td><a class="btn btn-primary" href="<%=request.getContextPath()%>/ParticipanteServlet?action=editar&id="><span class="fa fa-edit"></span></a></td>
-                                <td><a class="btn btn-danger" href="<%=request.getContextPath()%>/ParticipanteServlet?action=borrar&id="><span class="fa fa-trash"></span></a></td>
+                                <td><a class="btn btn-primary" href="<%=request.getContextPath()%>/ParticipanteServlet?action=editar&id=<%=participante.getIdParticipante()%>"><span class="fa fa-edit"></span></a></td>
+                                <td><a class="btn btn-danger" href="<%=request.getContextPath()%>/ParticipanteServlet?action=borrar&id=<%=participante.getIdParticipante()%>"><span class="fa fa-trash"></span></a></td>
                             </tr>
                         <%}%>
                         </tbody>

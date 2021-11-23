@@ -5,7 +5,10 @@ import pe.edu.pucp.iweb.lab9.lab9_grupo9.Beans.Participante;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class ParticipanteDao extends BaseDao{
+public class ParticipanteDao{
+    String user = "root";
+    String pass = "root";
+    String url = "jdbc:mysql://localhost:3306/lab9?serverTimezone=America/Lima";
 
     public ArrayList<Participante> listaParticipantes(){
         try {
@@ -20,9 +23,7 @@ public class ParticipanteDao extends BaseDao{
         String sentenciaSQL = "SELECT participante.nombre,apellidos,edad,genero,p.nombre FROM participante\n"+
                                 "INNER JOIN pais p ON (participante.pais_idpais = p.idpais);";
 
-        String url = "jdbc:mysql://localhost:3306/lab9?serverTimezone=America/Lima";
-
-        try (Connection conn = DriverManager.getConnection(url, "root", "root");
+        try (Connection conn = DriverManager.getConnection(url, user, pass);
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sentenciaSQL)) {
 
@@ -43,6 +44,12 @@ public class ParticipanteDao extends BaseDao{
         return listita;
     }
 
+    public Participante obtenerParticipantePorId(int idParticipante){
+        Participante participante = null;
 
+
+
+        return participante;
+    }
 
 }

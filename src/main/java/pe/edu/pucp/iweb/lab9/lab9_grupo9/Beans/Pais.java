@@ -15,6 +15,14 @@ public class Pais {
         this.cantidadPoblacion = cantidadPoblacion;
     }
 
+    public int getIdPais() {
+        return idPais;
+    }
+
+    public void setIdPais(int idPais) {
+        this.idPais = idPais;
+    }
+
     public int getCantidadPoblacion() {
         return cantidadPoblacion;
     }
