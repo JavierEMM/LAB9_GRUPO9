@@ -3,8 +3,15 @@ package pe.edu.pucp.iweb.lab9.lab9_grupo9.Beans;
 public class Pais {
     private String nombre;
     private String continente;
-    private double tamano;
+    private String tamano;
     private int cantidadPoblacion;
+
+    public Pais(String nombre, String continente , String tamano, int cantidadPoblacion) {
+        this.nombre = nombre;
+        this.continente = continente;
+        this.tamano = tamano;
+        this.cantidadPoblacion = cantidadPoblacion;
+    }
 
     public int getCantidadPoblacion() {
         return cantidadPoblacion;
@@ -30,15 +37,11 @@ public class Pais {
         this.continente = continente;
     }
 
-    public double getTamano() {
+    public String getTamano() {
         return tamano;
     }
 
-    public void setTamano(double tamano) {
+    public void setTamano(String tamano) {
         this.tamano = tamano;
     }
-
-
-
-
 }
