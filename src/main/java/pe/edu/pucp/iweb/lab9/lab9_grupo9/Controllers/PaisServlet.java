@@ -36,6 +36,10 @@ public class PaisServlet extends HttpServlet {
                 view.forward(request, response);
                 break;
             case "filtrar":
+                String idcontinente = request.getParameter("idcontinente");
+                request.setAttribute("listaPaises",paisDao.listarPaisesFiltrados(Integer.parseInt(idcontinente)));
+                view = request.getRequestDispatcher("/paises.jsp");
+                view.forward(request, response);
                 break;
             case "eliminar":
                 String idPaisEliminar = request.getParameter("id");
