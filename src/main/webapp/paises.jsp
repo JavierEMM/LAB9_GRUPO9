@@ -49,7 +49,6 @@
                     <th>tamaño</th>
                     <th></th>
                     <th></th>
-                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -59,6 +58,12 @@
                     <td><%=pais.getContinente()%></td>
                     <td><%=pais.getCantidadPoblacion()%></td>
                     <td><%=pais.getTamano()%></td>
+                    <td>
+                        <button type="button" class="btn btn-primary" onclick="window.location.assign('<%=request.getContextPath()%>/PaisServlet?action=editar&id=<%=pais.getIdPais()%>')" >Editar</button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger">Eliminar</button>
+                    </td>
                 </tr>
                 <%}%>
                 </tbody>

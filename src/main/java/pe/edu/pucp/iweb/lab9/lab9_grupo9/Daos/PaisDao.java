@@ -69,4 +69,15 @@ public class PaisDao extends BaseDao{
             e.printStackTrace();
         }
     }
+
+    public Pais obtenerPaisId(int idPais){
+        PaisDao paisDao = new PaisDao();
+        Pais paisE = null;
+        for (Pais pais: paisDao.listarPaises()){
+            if (pais.getIdPais() == idPais){
+                paisE = pais;
+            }
+        }
+        return paisE;
+    }
 }
