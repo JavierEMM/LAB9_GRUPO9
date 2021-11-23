@@ -1,6 +1,8 @@
-
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="pe.edu.pucp.iweb.lab9.lab9_grupo9.Beans.Participante" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="mensaje" scope="request" type="java.lang.String" class="java.lang.String"/>
+<% ArrayList<Participante> listaParticipantes = (ArrayList) request.getAttribute("listaParticipantes");%>
 <html>
     <jsp:include page="/static/head.jsp">
         <jsp:param name="title" value="Lista de Participantes"/>
@@ -41,21 +43,24 @@
                     <table class="table table-dark table-transparent table-hover">
                         <thead>
                             <tr>
-                                <th>ID</th>
                                 <th>Nombre</th>
                                 <th>Edad</th>
                                 <th>Nacionalidad</th>
                                 <th>Genero</th>
-                            </tr>
-                            <tr>
-                                <td><%=artista.getIdArtista()%></td>
-                                <td><%=artista.getNombreArtista()%></td>
-                                <td><%=artista.getNombreBanda()%></td>
-                                <td><a class="btn btn-primary" href="<%=request.getContextPath()%>/artistas?action=editar&id=<%=artista.getIdArtista()%>"><span class="fa fa-edit"></span></a></td>
-                                <td><a class="btn btn-danger" href="<%=request.getContextPath()%>/artistas?action=borrar&id=<%=artista.getIdArtista()%>"><span class="fa fa-trash"></span></a></td>
+                                <th>Editar</th>
+                                <th>Eliminar</th>
                             </tr>
                         </thead>
                         <tbody>
+                            <tr>
+                                <%for(Participante participante : listaParticipantes){%>
+                                <td><%=participante.getNombre()%> <%=participante.getApellido()%></td>
+                                <td><%=participante.getEdad()%></td>
+                                <td><%=participante.getNacionalidad()%></td>
+                                <td><%=participante.getGenero()%></td>
+                                <td><a class="btn btn-primary" href="<%=request.getContextPath()%>/ParticipanteServlet?action=editar&id="><span class="fa fa-edit"></span></a></td>
+                                <td><a class="btn btn-danger" href="<%=request.getContextPath()%>/ParticipanteServlet?action=borrar&id="><span class="fa fa-trash"></span></a></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
