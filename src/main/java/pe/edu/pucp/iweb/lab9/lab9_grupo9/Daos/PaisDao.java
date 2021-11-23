@@ -1,11 +1,14 @@
 package pe.edu.pucp.iweb.lab9.lab9_grupo9.Daos;
 
 import pe.edu.pucp.iweb.lab9.lab9_grupo9.Beans.Pais;
+import pe.edu.pucp.iweb.lab9.lab9_grupo9.Beans.Participante;
 
 import java.sql.*;
 import java.util.ArrayList;
 
 public class PaisDao extends BaseDao{
+
+
     public ArrayList<Pais> listarPaises(){
         ArrayList<Pais> listaPaises = new ArrayList<>();
 
@@ -69,4 +72,35 @@ public class PaisDao extends BaseDao{
             e.printStackTrace();
         }
     }
+
+    /*public String obtenerNombrePaisPorId(int idPais){
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        String nombre = null;
+        String url = "jdbc:mysql://localhost:3306/lab9?serverTimezone=America/Lima";
+
+        String sentenciaSQL = "SELECT nombre  FROM pais WHERE idpais = ?;";
+        try (Connection conn = DriverManager.getConnection(url, "root", "root");
+             PreparedStatement pstmt = conn.prepareStatement(sentenciaSQL);){
+            pstmt.setInt(1, idPais);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()){
+                nombre = rs.getString(1);
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return nombre;
+
+    }*/
+
+
+
+
 }

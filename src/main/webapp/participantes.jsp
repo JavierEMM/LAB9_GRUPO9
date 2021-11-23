@@ -1,7 +1,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="pe.edu.pucp.iweb.lab9.lab9_grupo9.Beans.Participante" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id="mensaje" scope="request" type="java.lang.String" class="java.lang.String"/>
+<jsp:useBean id="msg" scope="request" type="java.lang.String" class="java.lang.String"/>
 <% ArrayList<Participante> listaParticipantes = (ArrayList<Participante>) request.getAttribute("listaParticipantes");%>
 <html>
     <jsp:include page="/static/head.jsp">
@@ -17,19 +17,44 @@
                 <h1>Lista de Participantes</h1>
             </div>
 
-            <% if (mensaje.equalsIgnoreCase("corr")) { %>
+            <% if (msg.equalsIgnoreCase("edcorr")) { %>
             <div class="alert alert-success" role="alert">
-                Artista creado exitosamente
+                Participante editado exitosamente
             </div>
             <% } %>
-            <% if (mensaje.equalsIgnoreCase("err")) { %>
+            <% if (msg.equalsIgnoreCase("crecorr")) { %>
+            <div class="alert alert-success" role="alert">
+                Participante creado exitosamente
+            </div>
+            <% } %>
+            <% if (msg.equalsIgnoreCase("eddaterr")) { %>
             <div class="alert alert-danger" role="alert">
-                Error al crear el artista
+                Nombre o Apellido erroneo
             </div>
             <% } %>
-            <% if (mensaje.equalsIgnoreCase("borrcorr")) { %>
-            <div class="alert alert-success" role="alert">
-                Eliminacion de artista exitoso
+            <% if (msg.equalsIgnoreCase("credaterr")) { %>
+            <div class="alert alert-danger" role="alert">
+                Nombre o Apellido erroneo
+            </div>
+            <% } %>
+            <% if (msg.equalsIgnoreCase("edalldaterr")) { %>
+            <div class="alert alert-danger" role="alert">
+                Nombre , Apellidos y Edad erroneo
+            </div>
+            <% } %>
+            <% if (msg.equalsIgnoreCase("crealldaterr")) { %>
+            <div class="alert alert-danger" role="alert">
+                Nombre , Apellidos y Edad erroneo
+            </div>
+            <% } %>
+            <% if (msg.equalsIgnoreCase("edageerr")) { %>
+            <div class="alert alert-danger" role="alert">
+                Edad erronea
+            </div>
+            <% } %>
+            <% if (msg.equalsIgnoreCase("creageerr")) { %>
+            <div class="alert alert-danger" role="alert">
+                Edad erronea
             </div>
             <% } %>
 
@@ -46,8 +71,8 @@
                                 <th>Nombre</th>
                                 <th>Apellido</th>
                                 <th>Edad</th>
-                                <th>Nacionalidad</th>
                                 <th>Genero</th>
+                                <th>Nacionalidad</th>
                             </tr>
                         </thead>
                         <tbody>
