@@ -152,4 +152,148 @@ public class ParticipanteDao{
         }
     }
 
+    public boolean participantePerteneceUniversidad(int idParticipante){
+        boolean pertenece = false;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        String sentenciaSQL = "SELECT p.idparticipante,p.nombre,p.apellidos,p.edad,p.genero,codigo,promedio_ponderado,condicion,u.nombre FROM alumno\n"+
+                                "INNER JOIN participante p ON (alumno.participante_idparticipante = p.idparticipante)\n"+
+                                "INNER JOIN universidad u ON (alumno.universidad_iduniversidad = u.iduniversidad)\n"+
+                                "WHERE p.idparticipante = ?;";
+
+        try (Connection connection = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt = connection.prepareStatement(sentenciaSQL);) {
+
+            pstmt.setInt(1,idParticipante);
+            try(ResultSet rs = pstmt.executeQuery()){
+                if(rs.next()){
+                    pertenece = true;
+                }
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        return pertenece;
+    }
+
+    public void borrarParticipante(int idParticipante){
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        String sentenciaSQL = "DELETE FROM participante WHERE idparticipante = ?";
+
+        try (Connection connection = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt = connection.prepareStatement(sentenciaSQL);) {
+            pstmt.setInt(1,idParticipante);
+            pstmt.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+    }
+
+    public double promedioEdadParticipantes(){
+        double promedio = 0.0;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        String sentenciaSQL = "SELECT sum(edad)/count(edad) FROM participante";
+        try (Connection conn = DriverManager.getConnection(url, user, pass);
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sentenciaSQL)) {
+
+            while (rs.next()) {
+                String promedioStr = rs.getString(1);
+                promedio = Double.parseDouble(promedioStr);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return promedio;
+    }
+
+    public ArrayList<Double> porcentajeHombresYMujeres(){
+        ArrayList<Double> porcentajeHombreMujer = new ArrayList<>();
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        String sentenciaSQL1 = "SELECT count(edad) FROM participante;";
+        String sentenciaSQL2 = "SELECT genero,count(*) FROM participante\n"+
+                                "GROUP BY genero";
+
+        try (Connection conn = DriverManager.getConnection(url, user, pass);
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sentenciaSQL1)) {
+
+            rs.next();
+            try(Statement stmt2 = conn.createStatement();
+                ResultSet rs2 = stmt2.executeQuery(sentenciaSQL2)){
+                rs2.next();
+                String cantidadMasculinoStr = rs2.getString(2);
+                double cantidadMasculino = Double.parseDouble(cantidadMasculinoStr);
+                //int cantidadMasculino = rs2.getInt(2);
+                rs2.next();
+                rs2.next();
+                String cantidadFemeninoStr = rs2.getString(2);
+                double cantidadFemenino = Double.parseDouble(cantidadFemeninoStr);
+                //int cantidadFemenino = rs2.getInt(2);
+                String cantidadTotalStr = rs.getString(1);
+                double cantidadTotal = Double.parseDouble(cantidadTotalStr);
+                //int cantidadTotal = rs.getInt(1);
+                double porcentajeMasculino = (cantidadMasculino/cantidadTotal)*100;
+                double porcentajeMujer = (cantidadFemenino/cantidadTotal)*100;
+                porcentajeHombreMujer.add(porcentajeMasculino);
+                porcentajeHombreMujer.add(porcentajeMujer);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        return porcentajeHombreMujer;
+    }
+
+    public String paisMayorNumeroParticipantes(){
+        String nombrePais = null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        String sentenciaSQL = "SELECT p.nombre FROM participante\n"+
+                                "INNER JOIN pais p ON (participante.pais_idpais = p.idpais)\n"+
+                                "GROUP BY p.nombre\n"+
+                                "ORDER BY count(*) DESC\n"+
+                                "LIMIT 1;";
+
+        try (Connection conn = DriverManager.getConnection(url, user, pass);
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sentenciaSQL)) {
+            rs.next();
+            nombrePais = rs.getString(1);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return nombrePais;
+    }
+
 }

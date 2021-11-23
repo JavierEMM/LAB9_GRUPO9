@@ -2,6 +2,12 @@
 <%@ page import="pe.edu.pucp.iweb.lab9.lab9_grupo9.Beans.Participante" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="msg" scope="request" type="java.lang.String" class="java.lang.String"/>
+<!--jsp:useBean id="pais" scope="request" type="java.lang.String" class="java.lang.String"/-->
+<% String pais = (String) request.getAttribute("pais");%>
+<!--jsp:useBean id="porcentaje" scope="request" type="java.util.ArrayList<java.lang.Double>"/-->
+<% ArrayList<Double> porcentaje = (ArrayList<Double>) request.getAttribute("porcentaje");%>
+<!--jsp:useBean id="promedio" scope="request" type="java.lang.Double" class="java.lang.Double" class="java.lang.String"/-->
+<% Double promedio = (Double) request.getAttribute("promedio");%>
 <% ArrayList<Participante> listaParticipantes = (ArrayList<Participante>) request.getAttribute("listaParticipantes");%>
 <html>
     <jsp:include page="/static/head.jsp">
@@ -27,6 +33,11 @@
                 Participante creado exitosamente
             </div>
             <% } %>
+            <% if (msg.equalsIgnoreCase("borrcorr")) { %>
+            <div class="alert alert-success" role="alert">
+                Participante borrado exitosamente
+            </div>
+            <% } %>
             <% if (msg.equalsIgnoreCase("eddaterr")) { %>
             <div class="alert alert-danger" role="alert">
                 Nombre o Apellido erroneo
@@ -35,6 +46,11 @@
             <% if (msg.equalsIgnoreCase("credaterr")) { %>
             <div class="alert alert-danger" role="alert">
                 Nombre o Apellido erroneo
+            </div>
+            <% } %>
+            <% if (msg.equalsIgnoreCase("borrerr")) { %>
+            <div class="alert alert-danger" role="alert">
+                No se puede eliminar al participante porque pertenece a una universidad
             </div>
             <% } %>
             <% if (msg.equalsIgnoreCase("edalldaterr")) { %>
@@ -85,11 +101,19 @@
                                 <td><%=participante.getNacionalidad()%></td>
                                 <td><%=participante.getGenero()%></td>
                                 <td><a class="btn btn-primary" href="<%=request.getContextPath()%>/ParticipanteServlet?action=editar&id=<%=participante.getIdParticipante()%>"><span class="fa fa-edit"></span></a></td>
-                                <td><a class="btn btn-danger" href="<%=request.getContextPath()%>/ParticipanteServlet?action=borrar&id=<%=participante.getIdParticipante()%>"><span class="fa fa-trash"></span></a></td>
+                                <td><a class="btn btn-danger"  href="<%=request.getContextPath()%>/ParticipanteServlet?action=borrar&id=<%=participante.getIdParticipante()%>"><span class="fa fa-trash"></span></a></td>
                             </tr>
                         <%}%>
                         </tbody>
                     </table>
+                    <div class="d-flex justify-content-center">
+                        <label class="form-label">Pais con mayor numero de participantes: <%=pais%> </label>
+                        <br>
+                        <label class="form-label">Porcentaje de hombres: <%=porcentaje.get(0)%><%="%"%> </label>
+                        <br>
+                        <label class="form-label">Porcentaje de mujeres: <%=porcentaje.get(1)%><%="%"%> </label>
+                        <label class="form-label">Promedio de edad de los participantes: <%=promedio%> </label>
+                    </div>
                 </div>
             </div>
         </div>

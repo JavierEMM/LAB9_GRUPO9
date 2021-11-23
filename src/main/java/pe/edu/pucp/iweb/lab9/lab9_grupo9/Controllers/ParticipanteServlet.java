@@ -25,6 +25,9 @@ public class ParticipanteServlet extends HttpServlet {
                 String mensaje = request.getParameter("msg");
                 request.setAttribute("msg",mensaje);
                 request.setAttribute("listaParticipantes",participanteDao.listaParticipantes());
+                request.setAttribute("pais",participanteDao.paisMayorNumeroParticipantes());
+                request.setAttribute("porcentaje",participanteDao.porcentajeHombresYMujeres());
+                request.setAttribute("promedio",participanteDao.promedioEdadParticipantes());
                 view = request.getRequestDispatcher("/participantes.jsp");
                 view.forward(request, response);
                 break;
@@ -63,7 +66,15 @@ public class ParticipanteServlet extends HttpServlet {
 
             //BORRAR LOGICO O BORRAR BASE DE DATOS
             case "borrar":
-                String idParticipante2 = request.getParameter("id");
+                String idParticipanteStr2 = request.getParameter("id");
+                int idParticipante2 = Integer.parseInt(idParticipanteStr2);
+                boolean pertenece = participanteDao.participantePerteneceUniversidad(idParticipante2);
+                if(pertenece == true){
+                    response.sendRedirect(request.getContextPath() + "/ParticipanteServlet?msg=borrerr");
+                }else{
+                    participanteDao.borrarParticipante(idParticipante2);
+                    response.sendRedirect(request.getContextPath() + "/ParticipanteServlet?msg=borrcorr");
+                }
 
                 break;
 
@@ -79,9 +90,13 @@ public class ParticipanteServlet extends HttpServlet {
         ParticipanteDao participanteDao = new ParticipanteDao();
         switch (accion){
             case "crear":
-                String nombreParticipante = request.getParameter("nombreParticipante");
-                String apellidoParticipante = request.getParameter("apellidoParticipante");
-                String edadParticipanteStr = request.getParameter("edadParticipante");
+                String nombreParticipante = request.getParameter("nombreParticipante") != "" ? request.getParameter("nombreParticipante") : "1";
+                //String nombreParticipante = request.getParameter("nombreParticipante") != null ? request.getParameter("nombreParticipante") : "A";
+                //String nombreParticipante = request.getParameter("nombreParticipante");
+                String apellidoParticipante = request.getParameter("apellidoParticipante") != ""  ? request.getParameter("apellidoParticipante") : "1";
+                //String apellidoParticipante = request.getParameter("apellidoParticipante");
+                String edadParticipanteStr = request.getParameter("edadParticipante") != ""  ? request.getParameter("edadParticipante") : "0";
+                //String edadParticipanteStr = request.getParameter("edadParticipante");
                 int edadParticipante = Integer.parseInt(edadParticipanteStr);
                 String idPaisParticipanteStr = request.getParameter("idPais");
                 int idPaisParticipante = Integer.parseInt(idPaisParticipanteStr);
@@ -116,9 +131,9 @@ public class ParticipanteServlet extends HttpServlet {
             case "editar":
                 String idStr = request.getParameter("id");
                 int id = Integer.parseInt(idStr);
-                String nombre = request.getParameter("nombreParticipante");
-                String apellido = request.getParameter("apellidoParticipante");
-                String edadStr = request.getParameter("edadParticipante");
+                String nombre = request.getParameter("nombreParticipante") != "" ? request.getParameter("nombreParticipante") : "1";
+                String apellido = request.getParameter("apellidoParticipante") != ""  ? request.getParameter("apellidoParticipante") : "1";
+                String edadStr = request.getParameter("edadParticipante") != ""  ? request.getParameter("edadParticipante") : "0";
                 int edad = Integer.parseInt(edadStr);
                 String idPaisStr= request.getParameter("idPais");
                 int idPais = Integer.parseInt(idPaisStr);
@@ -149,12 +164,6 @@ public class ParticipanteServlet extends HttpServlet {
                     }
 
                 }
-
-                break;
-
-            //BORRAR LOGICO O BORRAR BASE DE DATOS
-            case "borrar":
-
 
                 break;
 
