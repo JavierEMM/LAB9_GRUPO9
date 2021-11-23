@@ -35,17 +35,17 @@
                 <div class="w-75">
 
                     <div class="my-2">
-                        <a href="<%=request.getContextPath()%>/artistas?action=crear" class="btn btn-info">Añadir artista</a>
+                        <a href="<%=request.getContextPath()%>/ParticipanteServlet?action=crear" class="btn btn-info">Añadir participante</a>
                     </div>
 
                     <table class="table table-dark table-transparent table-hover">
                         <thead>
                             <tr>
-                                <th>Id</th>
-                                <th>Nombre del Artista</th>
-                                <th>Nombre de la Banda</th>
-                                <th>Actualizar</th>
-                                <th>Eliminar</th>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Edad</th>
+                                <th>Nacionalidad</th>
+                                <th>Genero</th>
                             </tr>
                         </thead>
                         <tbody>
