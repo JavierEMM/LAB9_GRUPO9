@@ -1,19 +1,18 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!--jsp:useBean id="listaArtistas" scope="request" type="java.util.ArrayList<Beans.Artista>"/-->
 <jsp:useBean id="mensaje" scope="request" type="java.lang.String" class="java.lang.String"/>
 <html>
     <jsp:include page="/static/head.jsp">
-        <jsp:param name="title" value="Lista de Artistas"/>
+        <jsp:param name="title" value="Lista de Participantes"/>
     </jsp:include>
     <body>
         <div class='container'>
             <jsp:include page="/includes/navbar.jsp">
-                <jsp:param name="page" value="artistas"/>
+                <jsp:param name="page" value="participantes"/>
             </jsp:include>
 
             <div class="mt-2 text-center">
-                <h1>Lista de Artistas</h1>
+                <h1>Lista de Participantes</h1>
             </div>
 
             <% if (mensaje.equalsIgnoreCase("corr")) { %>
