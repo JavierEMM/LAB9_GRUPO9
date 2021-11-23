@@ -12,7 +12,7 @@
 </head>
 <style>
     .fila-green {
-        background-color: yellowgreen;
+        background-color: darkorchid;
     }
 
     .fila-red {
@@ -20,14 +20,14 @@
     }
 
     .fila-blue {
-        background-color: darkblue;
+        background-color: darkslategrey;
     }
 
     .fila-purple {
-        background-color: purple;
+        background-color: darkcyan;
     }
 
     .fila-yellow {
-        background-color: yellow;
+        background-color: darkgoldenrod;
     }
 </style>

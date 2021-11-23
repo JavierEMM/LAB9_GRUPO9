@@ -31,10 +31,11 @@ public class UniversidadServlet extends HttpServlet {
 
         switch (accion){
             case "listar":
+                String filter = request.getParameter("filter") != null ? request.getParameter("filter") : "";
                 String msg = request.getParameter("msg") != null ? request.getParameter("msg") : "";
+                request.setAttribute("msg",msg);
                 try {
-                    System.out.println(universidadDao.listarUniversidades().get(1).getContinente().getNombre());
-                    request.setAttribute("listaUniversidades",universidadDao.listarUniversidades());
+                    request.setAttribute("listaUniversidades",universidadDao.listarUniversidades(filter));
 
                 } catch (SQLException e) {
                     response.sendRedirect(request.getContextPath()+"/UniversidadServlet?msg=sql");
@@ -92,7 +93,7 @@ public class UniversidadServlet extends HttpServlet {
                     } else{
                         if (universidadDao.validarNombre(nombreUniversidad)){
                             universidadDao.crearUniversidad(nombreUniversidad,Integer.parseInt(ranking),foto, Integer.parseInt(pais));
-                            response.sendRedirect(request.getContextPath() +"/UniversidadServlet");
+                            response.sendRedirect(request.getContextPath() +"/UniversidadServlet?msg=crcorr");
                         }else{
                             response.sendRedirect(request.getContextPath() + "/UniversidadServlet?msg=nombreinvalido");
                         }
@@ -116,7 +117,7 @@ public class UniversidadServlet extends HttpServlet {
                     } else{
                         if (universidadDao.validarNombre(nombreUniversidad)){
                             universidadDao.editarUniversidad(Integer.parseInt(idUniversidadStr), nombreUniversidad,Integer.parseInt(ranking),foto,Integer.parseInt(pais));
-                            response.sendRedirect(request.getContextPath() +"/UniversidadServlet");
+                            response.sendRedirect(request.getContextPath() +"/UniversidadServlet?msg=edcorr");
                         }else{
                             response.sendRedirect(request.getContextPath() + "/UniversidadServlet?msg=nombreinvalido");
                         }

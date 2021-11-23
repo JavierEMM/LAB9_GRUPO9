@@ -2,7 +2,7 @@
 <%@ page import="pe.edu.pucp.iweb.lab9.lab9_grupo9.Beans.Pais" %>
 <%@ page import="pe.edu.pucp.iweb.lab9.lab9_grupo9.Beans.Universidad" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id="mensaje" scope="request" type="java.lang.String" class="java.lang.String"/>
+<jsp:useBean id="msg" scope="request" type="java.lang.String" class="java.lang.String"/>
 <% ArrayList<Universidad> listaUniversidades = (ArrayList) request.getAttribute("listaUniversidades");%>
 <html>
 <jsp:include page="/static/head.jsp">
@@ -18,19 +18,34 @@
         <h1>Lista de Universidades</h1>
     </div>
 
-    <% if (mensaje.equalsIgnoreCase("corr")) { %>
-    <div class="alert alert-success" role="alert">
-        Artista creado exitosamente
-    </div>
-    <% } %>
-    <% if (mensaje.equalsIgnoreCase("err")) { %>
+    <% if (msg.equalsIgnoreCase("nombrevacio")) { %>
     <div class="alert alert-danger" role="alert">
-        Error al crear el artista
+        No deje el nombre vacio
     </div>
     <% } %>
-    <% if (mensaje.equalsIgnoreCase("borrcorr")) { %>
+    <% if (msg.equalsIgnoreCase("rankingvacio")) { %>
+    <div class="alert alert-danger" role="alert">
+        No deje el ranking vacio
+    </div>
+    <% } %>
+    <% if (msg.equalsIgnoreCase("nombreinvalido")) { %>
+    <div class="alert alert-danger" role="alert">
+        Los caracteres ingresados en el nombre son invalidos
+    </div>
+    <% } %>
+        <% if (msg.equalsIgnoreCase("sql")) { %>
+    <div class="alert alert-danger" role="alert">
+        Error de guardado de datos
+    </div>
+    <% } %>
+    <% if (msg.equalsIgnoreCase("crcorr")) { %>
     <div class="alert alert-success" role="alert">
-        Eliminacion de artista exitoso
+        Creacion de universidad exitosa
+    </div>
+    <% } %>
+    <% if (msg.equalsIgnoreCase("edcorr")) { %>
+    <div class="alert alert-success" role="alert">
+        Edicion de universidad exitosa
     </div>
     <% } %>
 
@@ -42,11 +57,11 @@
             <table class="table table-dark table-transparent table-hover">
                 <thead>
                 <tr>
-                    <th>Nombre</th>
-                    <th>Pais</th>
-                    <th>Ranking</th>
-                    <th>Numero de alumnos</th>
-                    <th>Foto</th>
+                    <th style="text-align: center"><a style="color: white; text-decoration: none;" href="<%=request.getContextPath()%>/UniversidadServlet?filter=nombre">Nombre</a></th>
+                    <th style="text-align: center"><a style="color: white; text-decoration: none;" href="<%=request.getContextPath()%>/UniversidadServlet?filter=Pais">Pais</a></th>
+                    <th style="text-align: center"><a style="color: white; text-decoration: none;" href="<%=request.getContextPath()%>/UniversidadServlet">Ranking</a></th>
+                    <th style="text-align: center"><a style="color: white; text-decoration: none;" href="<%=request.getContextPath()%>/UniversidadServlet?filter=Alumnos">Numero de Alumnos</a></th>
+                    <th style="text-align: center">Foto</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -55,57 +70,57 @@
                 <%for(Universidad universidad : listaUniversidades){%>
                 <%if(universidad.getContinente().getNombre().equalsIgnoreCase("Africa")){%>
                 <tr class="fila-green">
-                    <td><%=universidad.getNombre()%></td>
-                    <td><%=universidad.getPais().getNombre()%></td>
-                    <td><%=universidad.getRanking()%></td>
-                    <td><%=universidad.getNumeroAlumnos()%></td>
-                    <td><img src="<%=universidad.getFoto()%>"/></td>
-                    <td><a class="btn btn-primary" href="<%=request.getContextPath()%>/UniversidadServlet?action=editar&id=<%=universidad.getIdUniversidad()%>"><span class="fa fa-edit"></span></a></td>
-                    <td><a class="btn btn-danger" href="<%=request.getContextPath()%>/UniversidadServlet?action=borrar&id=<%=universidad.getIdUniversidad()%>"><span class="fa fa-trash"></span></a></td>
+                    <td style="text-align: center"><%=universidad.getNombre()%></td>
+                    <td style="text-align: center"><%=universidad.getPais().getNombre()%></td>
+                    <td style="text-align: center"><%=universidad.getRanking()%></td>
+                    <td style="text-align: center"><%=universidad.getNumeroAlumnos()%></td>
+                    <td style="text-align: center"><img src="<%=universidad.getFoto()%>"/></td>
+                    <td style="text-align: center"><a class="btn btn-primary" href="<%=request.getContextPath()%>/UniversidadServlet?action=editar&id=<%=universidad.getIdUniversidad()%>"><span class="fa fa-edit"></span></a></td>
+                    <td style="text-align: center"><a class="btn btn-danger" href="<%=request.getContextPath()%>/UniversidadServlet?action=borrar&id=<%=universidad.getIdUniversidad()%>"><span class="fa fa-trash"></span></a></td>
                 </tr>
                 <%}%>
                 <%if(universidad.getContinente().getNombre().equalsIgnoreCase("America")){%>
                 <tr class="fila-yellow">
-                    <td><%=universidad.getNombre()%></td>
-                    <td><%=universidad.getPais().getNombre()%></td>
-                    <td><%=universidad.getRanking()%></td>
-                    <td><%=universidad.getNumeroAlumnos()%></td>
-                    <td><img src="<%=universidad.getFoto()%>"/></td>
-                    <td><a class="btn btn-primary" href="<%=request.getContextPath()%>/UniversidadServlet?action=editar&id=<%=universidad.getIdUniversidad()%>"><span class="fa fa-edit"></span></a></td>
-                    <td><a class="btn btn-danger" href="<%=request.getContextPath()%>/UniversidadServlet?action=borrar&id=<%=universidad.getIdUniversidad()%>"><span class="fa fa-trash"></span></a></td>
+                    <td style="text-align: center"><%=universidad.getNombre()%></td>
+                    <td style="text-align: center"><%=universidad.getPais().getNombre()%></td>
+                    <td style="text-align: center"><%=universidad.getRanking()%></td>
+                    <td style="text-align: center"><%=universidad.getNumeroAlumnos()%></td>
+                    <td style="text-align: center"><img src="<%=universidad.getFoto()%>"/></td>
+                    <td style="text-align: center"><a class="btn btn-primary" href="<%=request.getContextPath()%>/UniversidadServlet?action=editar&id=<%=universidad.getIdUniversidad()%>"><span class="fa fa-edit"></span></a></td>
+                    <td style="text-align: center"><a class="btn btn-danger" href="<%=request.getContextPath()%>/UniversidadServlet?action=borrar&id=<%=universidad.getIdUniversidad()%>"><span class="fa fa-trash"></span></a></td>
                 </tr>
                 <%}%>
                 <%if(universidad.getContinente().getNombre().equalsIgnoreCase("Oceania")){%>
                 <tr class="fila-purple">
-                    <td><%=universidad.getNombre()%></td>
-                    <td><%=universidad.getPais().getNombre()%></td>
-                    <td><%=universidad.getRanking()%></td>
-                    <td><%=universidad.getNumeroAlumnos()%></td>
-                    <td><img src="<%=universidad.getFoto()%>"/></td>
-                    <td><a class="btn btn-primary" href="<%=request.getContextPath()%>/UniversidadServlet?action=editar&id=<%=universidad.getIdUniversidad()%>"><span class="fa fa-edit"></span></a></td>
-                    <td><a class="btn btn-danger" href="<%=request.getContextPath()%>/UniversidadServlet?action=borrar&id=<%=universidad.getIdUniversidad()%>"><span class="fa fa-trash"></span></a></td>
+                    <td style="text-align: center"><%=universidad.getNombre()%></td>
+                    <td style="text-align: center"><%=universidad.getPais().getNombre()%></td>
+                    <td style="text-align: center"><%=universidad.getRanking()%></td>
+                    <td style="text-align: center"><%=universidad.getNumeroAlumnos()%></td>
+                    <td style="text-align: center"><img src="<%=universidad.getFoto()%>"/></td>
+                    <td style="text-align: center"><a class="btn btn-primary" href="<%=request.getContextPath()%>/UniversidadServlet?action=editar&id=<%=universidad.getIdUniversidad()%>"><span class="fa fa-edit"></span></a></td>
+                    <td style="text-align: center"><a class="btn btn-danger" href="<%=request.getContextPath()%>/UniversidadServlet?action=borrar&id=<%=universidad.getIdUniversidad()%>"><span class="fa fa-trash"></span></a></td>
                 </tr>
                 <%}%>
                 <%if(universidad.getContinente().getNombre().equalsIgnoreCase("Europa")){%>
                 <tr class="fila-blue">
-                    <td><%=universidad.getNombre()%></td>
-                    <td><%=universidad.getPais().getNombre()%></td>
-                    <td><%=universidad.getRanking()%></td>
-                    <td><%=universidad.getNumeroAlumnos()%></td>
-                    <td><img src="<%=universidad.getFoto()%>"/></td>
-                    <td><a class="btn btn-primary" href="<%=request.getContextPath()%>/UniversidadServlet?action=editar&id=<%=universidad.getIdUniversidad()%>"><span class="fa fa-edit"></span></a></td>
-                    <td><a class="btn btn-danger" href="<%=request.getContextPath()%>/UniversidadServlet?action=borrar&id=<%=universidad.getIdUniversidad()%>"><span class="fa fa-trash"></span></a></td>
+                    <td style="text-align: center"><%=universidad.getNombre()%></td>
+                    <td style="text-align: center"><%=universidad.getPais().getNombre()%></td>
+                    <td style="text-align: center"><%=universidad.getRanking()%></td>
+                    <td style="text-align: center"><%=universidad.getNumeroAlumnos()%></td>
+                    <td style="text-align: center"><img src="<%=universidad.getFoto()%>"/></td>
+                    <td style="text-align: center"><a class="btn btn-primary" href="<%=request.getContextPath()%>/UniversidadServlet?action=editar&id=<%=universidad.getIdUniversidad()%>"><span class="fa fa-edit"></span></a></td>
+                    <td style="text-align: center"><a class="btn btn-danger" href="<%=request.getContextPath()%>/UniversidadServlet?action=borrar&id=<%=universidad.getIdUniversidad()%>"><span class="fa fa-trash"></span></a></td>
                 </tr>
                 <%}%>
                 <%if(universidad.getContinente().getNombre().equalsIgnoreCase("Asia")){%>
                 <tr class="fila-red">
-                    <td><%=universidad.getNombre()%></td>
-                    <td><%=universidad.getPais().getNombre()%></td>
-                    <td><%=universidad.getRanking()%></td>
-                    <td><%=universidad.getNumeroAlumnos()%></td>
-                    <td><img src="<%=universidad.getFoto()%>"/></td>
-                    <td><a class="btn btn-primary" href="<%=request.getContextPath()%>/UniversidadServlet?action=editar&id=<%=universidad.getIdUniversidad()%>"><span class="fa fa-edit"></span></a></td>
-                    <td><a class="btn btn-danger" href="<%=request.getContextPath()%>/UniversidadServlet?action=borrar&id=<%=universidad.getIdUniversidad()%>"><span class="fa fa-trash"></span></a></td>
+                    <td style="text-align: center"><%=universidad.getNombre()%></td>
+                    <td style="text-align: center"><%=universidad.getPais().getNombre()%></td>
+                    <td style="text-align: center"><%=universidad.getRanking()%></td>
+                    <td style="text-align: center"><%=universidad.getNumeroAlumnos()%></td>
+                    <td style="text-align: center"><img src="<%=universidad.getFoto()%>"/></td>
+                    <td style="text-align: center"><a class="btn btn-primary" href="<%=request.getContextPath()%>/UniversidadServlet?action=editar&id=<%=universidad.getIdUniversidad()%>"><span class="fa fa-edit"></span></a></td>
+                    <td style="text-align: center"><a class="btn btn-danger" href="<%=request.getContextPath()%>/UniversidadServlet?action=borrar&id=<%=universidad.getIdUniversidad()%>"><span class="fa fa-trash"></span></a></td>
                 </tr>
                 <%}%>
                 <%}%>

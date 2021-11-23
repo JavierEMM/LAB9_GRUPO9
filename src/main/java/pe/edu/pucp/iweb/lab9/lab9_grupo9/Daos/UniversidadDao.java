@@ -9,13 +9,35 @@ import java.util.ArrayList;
 
 public class UniversidadDao extends BaseDao{
 
-    public ArrayList<Universidad> listarUniversidades() throws SQLException {
+    public ArrayList<Universidad> listarUniversidades(String filter) throws SQLException {
         ArrayList<Universidad> listaUniversidad = new ArrayList<>();
-        String sql =  "SELECT u.iduniversidad,u.nombre,u.ranking,count(a.participante_idparticipante),u.foto,p.nombre,c.nombre FROM alumno a RIGHT JOIN universidad u ON u.iduniversidad= a.universidad_iduniversidad\n" +
-                "INNER JOIN pais p ON p.idpais = u.pais_idpais\n" +
-                "INNER JOIN continente c ON c.idcontinente = p.continente_idcontinente\n" +
-                "GROUP BY iduniversidad\n" +
-                "ORDER BY ranking;";
+        String sql="";
+        if(filter.equalsIgnoreCase("nombre")){
+            sql  =  "SELECT u.iduniversidad,u.nombre,u.ranking,count(a.participante_idparticipante),u.foto,p.nombre,c.nombre FROM alumno a RIGHT JOIN universidad u ON u.iduniversidad= a.universidad_iduniversidad\n" +
+                    "INNER JOIN pais p ON p.idpais = u.pais_idpais\n" +
+                    "INNER JOIN continente c ON c.idcontinente = p.continente_idcontinente\n" +
+                    "GROUP BY iduniversidad\n" +
+                    "ORDER BY u.nombre;";
+        }else if(filter.equalsIgnoreCase("Pais")){
+            sql  =  "SELECT u.iduniversidad,u.nombre,u.ranking,count(a.participante_idparticipante),u.foto,p.nombre,c.nombre FROM alumno a RIGHT JOIN universidad u ON u.iduniversidad= a.universidad_iduniversidad\n" +
+                    "INNER JOIN pais p ON p.idpais = u.pais_idpais\n" +
+                    "INNER JOIN continente c ON c.idcontinente = p.continente_idcontinente\n" +
+                    "GROUP BY iduniversidad\n" +
+                    "ORDER BY u.ranking;";
+        }else if(filter.equalsIgnoreCase("Alumnos")){
+            sql  =  "SELECT u.iduniversidad,u.nombre,u.ranking,count(a.participante_idparticipante),u.foto,p.nombre,c.nombre FROM alumno a RIGHT JOIN universidad u ON u.iduniversidad= a.universidad_iduniversidad\n" +
+                    "INNER JOIN pais p ON p.idpais = u.pais_idpais\n" +
+                    "INNER JOIN continente c ON c.idcontinente = p.continente_idcontinente\n" +
+                    "GROUP BY iduniversidad\n" +
+                    "ORDER BY count(a.participante_idparticipante);";
+        }else{
+          sql  =  "SELECT u.iduniversidad,u.nombre,u.ranking,count(a.participante_idparticipante),u.foto,p.nombre,c.nombre FROM alumno a RIGHT JOIN universidad u ON u.iduniversidad= a.universidad_iduniversidad\n" +
+                    "INNER JOIN pais p ON p.idpais = u.pais_idpais\n" +
+                    "INNER JOIN continente c ON c.idcontinente = p.continente_idcontinente\n" +
+                    "GROUP BY iduniversidad\n" +
+                    "ORDER BY ranking;";
+        }
+
         try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
