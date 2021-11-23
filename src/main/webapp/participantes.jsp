@@ -44,18 +44,18 @@
                         <thead>
                             <tr>
                                 <th>Nombre</th>
+                                <th>Apellido</th>
                                 <th>Edad</th>
                                 <th>Nacionalidad</th>
                                 <th>Genero</th>
-                                <th>Editar</th>
-                                <th>Eliminar</th>
                             </tr>
                         </thead>
                         <tbody>
                         <%for(Participante participante : listaParticipantes){%>
                             <tr>
 
-                                <td><%=participante.getNombre()%><%=participante.getApellido()%></td>
+                                <td><%=participante.getNombre()%></td>
+                                <td><%=participante.getApellido()%></td>
                                 <td><%=participante.getEdad()%></td>
                                 <td><%=participante.getNacionalidad()%></td>
                                 <td><%=participante.getGenero()%></td>

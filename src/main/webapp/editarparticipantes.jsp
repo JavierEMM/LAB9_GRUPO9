@@ -16,7 +16,7 @@
             </jsp:include>
 
             <div class="mt-2 text-center">
-                <h1>Editar Artista</h1>
+                <h1>Editar Participante</h1>
             </div>
             <div class="d-flex justify-content-center">
                 <div class="w-75">
@@ -26,8 +26,12 @@
                             <input class="form-control" type="text" value="<%=Participante.getIdParticipante()%>" disabled name="idParticipante" id="idParticipante">
                         </div>
                         <div class="form-group">
-                            <label for="nombresParticipante">Nombres del Participante</label>
-                            <input class="form-control" type="text" value="<%=Participante.getNombre()%> <%=Participante.getApellido()%>" name="nombreParticipante" id="nombresParticipante">
+                            <label for="nombresParticipante">Nombre del Participante</label>
+                            <input class="form-control" type="text" value="<%=Participante.getNombre()%>" name="nombreParticipante" id="nombresParticipante">
+                        </div>
+                        <div class="form-group">
+                            <label for="apellidosParticipante">Apellidos del Participante</label>
+                            <input class="form-control" type="text" value=" <%=Participante.getApellido()%>" name="apellidoParticipante" id="apellidosParticipante">
                         </div>
                         <div class="form-group">
                             <label for="edadParticipante">Edad del Participante</label>
@@ -53,47 +57,6 @@
                         </div>
                         <button type="submit" class="btn btn-primary">Actualizar</button>
                         <a class="btn btn-danger" href="<%=request.getContextPath()%>/ParticipanteServlet">Cancelar</a>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <jsp:include page="/static/scripts.jsp"/>
-    </body>
-</html>
-<%}%>
-<%if(vista.equals("crear")){%>
-<html>
-    <jsp:include page="/static/head.jsp">
-        <jsp:param name="title" value="Adicion de Artista"/>
-    </jsp:include>
-    <body>
-        <div class='container'>
-            <jsp:include page="/includes/navbar.jsp">
-                <jsp:param name="page" value="artistas"/>
-            </jsp:include>
-
-            <div class="mt-2 text-center">
-                <h1>Añadir Artista</h1>
-            </div>
-            <div class="d-flex justify-content-center">
-                <div class="w-75">
-                    <form method="POST" action="<%=request.getContextPath()%>/artistas?action=crear">
-                        <div class="form-group">
-                            <label for="nombreArtista1">Nombre del Artista</label>
-                            <input class="form-control" type="text"  name="nombreArtista" id="nombreArtista1">
-                        </div>
-                        <div class="form-group">
-                            <label>Nombre de la Banda</label>
-                            <select class="form-control form-select-sm" name="idBanda">
-                                <% for (Banda banda : listaBandas) { %>
-                                <option value="<%=banda.getIdBanda()%>">
-                                    <%=banda.getNombreBanda()%>
-                                </option>
-                                <% } %>
-                            </select>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Añadir</button>
-                        <a class="btn btn-danger" href="<%=request.getContextPath()%>/artistas">Cancelar</a>
                     </form>
                 </div>
             </div>

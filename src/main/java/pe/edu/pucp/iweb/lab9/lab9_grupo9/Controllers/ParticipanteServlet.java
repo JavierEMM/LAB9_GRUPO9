@@ -33,7 +33,6 @@ public class ParticipanteServlet extends HttpServlet {
                 int idParticipante = Integer.parseInt(idParticipanteStr);
                 Participante participante = participanteDao.obtenerParticipantePorId(idParticipante);
                 request.setAttribute("Participante",participante);
-
                 PaisDao paisDao = new PaisDao();
                 ArrayList<Pais> listaPaises = paisDao.listarPaises();
                 request.setAttribute("listaPaises",listaPaises);

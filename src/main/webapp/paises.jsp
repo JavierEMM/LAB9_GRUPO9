@@ -10,7 +10,7 @@
 <body>
 <div class='container'>
     <jsp:include page="/includes/navbar.jsp">
-        <jsp:param name="page" value="participantes"/>
+        <jsp:param name="page" value="paises"/>
     </jsp:include>
 
     <div class="mt-2 text-center">
