@@ -1,11 +1,31 @@
 package pe.edu.pucp.iweb.lab9.lab9_grupo9.Beans;
 
 public class Participante {
+    private int idParticipante;
     private String nombre;
     private String apellido;
     private int edad;
     private String nacionalidad;
     private String genero;
+
+    public Participante(String nombre, String apellido, int edad, String nacionalidad, String genero) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.edad = edad;
+        this.nacionalidad = nacionalidad;
+        this.genero = genero;
+    }
+
+    public Participante() {
+    }
+
+    public int getIdParticipante() {
+        return idParticipante;
+    }
+
+    public void setIdParticipante(int idParticipante) {
+        this.idParticipante = idParticipante;
+    }
 
     public String getNombre() {
         return nombre;

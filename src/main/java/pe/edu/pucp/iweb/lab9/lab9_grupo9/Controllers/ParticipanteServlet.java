@@ -1,5 +1,7 @@
 package pe.edu.pucp.iweb.lab9.lab9_grupo9.Controllers;
 
+import pe.edu.pucp.iweb.lab9.lab9_grupo9.Daos.ParticipanteDao;
+
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -9,12 +11,10 @@ import java.io.IOException;
 public class ParticipanteServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ParticipanteDao participanteDao = new ParticipanteDao();
+        request.setAttribute("listaParticipantes",participanteDao.listaParticipantes());
         RequestDispatcher view = request.getRequestDispatcher("/participantes.jsp");
         view.forward(request, response);
-
-
-
-
 
     }
 
@@ -25,9 +25,12 @@ public class ParticipanteServlet extends HttpServlet {
         switch (accion){
             case "listar":
 
+
                 break;
 
             case "crear":
+
+
 
                 break;
 
