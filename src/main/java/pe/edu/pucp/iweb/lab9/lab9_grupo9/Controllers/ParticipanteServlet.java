@@ -9,6 +9,9 @@ import java.io.IOException;
 public class ParticipanteServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher view = request.getRequestDispatcher("/participantes.jsp");
+        view.forward(request, response);
+
 
 
 
@@ -17,6 +20,27 @@ public class ParticipanteServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String accion = request.getParameter("action") != null ? request.getParameter("action") : "listar";
+
+        switch (accion){
+            case "listar":
+
+                break;
+
+            case "crear":
+
+                break;
+
+            case "editar":
+
+                break;
+
+            //BORRAR LOGICO O BORRAR BASE DE DATOS
+            case "borrar":
+
+                break;
+
+        }
 
     }
 }

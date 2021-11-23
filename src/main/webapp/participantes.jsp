@@ -47,6 +47,13 @@
                                 <th>Nacionalidad</th>
                                 <th>Genero</th>
                             </tr>
+                            <tr>
+                                <td><%=artista.getIdArtista()%></td>
+                                <td><%=artista.getNombreArtista()%></td>
+                                <td><%=artista.getNombreBanda()%></td>
+                                <td><a class="btn btn-primary" href="<%=request.getContextPath()%>/artistas?action=editar&id=<%=artista.getIdArtista()%>"><span class="fa fa-edit"></span></a></td>
+                                <td><a class="btn btn-danger" href="<%=request.getContextPath()%>/artistas?action=borrar&id=<%=artista.getIdArtista()%>"><span class="fa fa-trash"></span></a></td>
+                            </tr>
                         </thead>
                         <tbody>
                         </tbody>
