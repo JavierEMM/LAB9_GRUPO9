@@ -8,22 +8,17 @@
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link <%=request.getParameter("page").equals("bandas")? "active": "" %>"
-                   href="<%=request.getContextPath()%>/bandas">Bandas</a>
+                <a class="nav-link <%=request.getParameter("page").equals("paises")? "active": "" %>"
+                   href="<%=request.getContextPath()%>/PaisServlet">Pais</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link <%=request.getParameter("page").equals("artistas")? "active": "" %>"
-                   href="<%=request.getContextPath()%>/artistas">Artistas</a>
+                <a class="nav-link <%=request.getParameter("page").equals("participantes")? "active": "" %>"
+                   href="<%=request.getContextPath()%>/ParticipanteServlet">Participantes</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link <%=request.getParameter("page").equals("albumes")? "active": "" %>"
-                   href="<%=request.getContextPath()%>/albumes">Álbumes</a>
+                <a class="nav-link <%=request.getParameter("page").equals("universidades")? "active": "" %>"
+                   href="<%=request.getContextPath()%>/UniversidadServlet">Universidades</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link <%=request.getParameter("page").equals("canciones")? "active": "" %>"
-                   href="<%=request.getContextPath()%>/canciones">Canciones</a>
-            </li>
-
         </ul>
     </div>
 </nav>
