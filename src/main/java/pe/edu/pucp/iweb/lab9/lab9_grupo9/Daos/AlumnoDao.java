@@ -60,4 +60,17 @@ public class AlumnoDao extends  BaseDao {
         }
     }
 
+    public void editarCondicion(String idParticipante){
+        String sql = "UPDATE alumno set condicion = ? WHERE participante_idparticipante = ?";
+        try(Connection conn = this.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+        ){
+            pstmt.setString(1,"eliminado");
+            pstmt.setString(2,idParticipante);
+            pstmt.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
 }
