@@ -3,7 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="listaAlumnosPorUniversidad" scope="request" type="java.util.ArrayList<pe.edu.pucp.iweb.lab9.lab9_grupo9.Beans.Alumno>"/>
 <jsp:useBean id="vista" scope="request" type="java.lang.String"/>
-
+<jsp:useBean id="idUniversidad" scope="request" type="java.lang.String"/>
 <%if(vista.equalsIgnoreCase("mostrar")){%>
 <html>
     <jsp:include page="/static/head.jsp">
@@ -22,7 +22,7 @@
                 <div class="w-75">
 
                     <div class="my-2">
-                        <a href="<%=request.getContextPath()%>/ParticipanteServlet?action=crear" class="btn btn-info">Añadir alumno a la Universidad</a>
+                        <a href="<%=request.getContextPath()%>/AlumnoServlet?action=crear&idUniversidad=<%=idUniversidad%>" class="btn btn-info">Añadir alumno a la Universidad</a>
                     </div>
                     <%if(listaAlumnosPorUniversidad.size() == 0){%>
                     <h1>No hay ningun alumno en la Universidad</h1>
@@ -40,17 +40,29 @@
                         </thead>
                         <tbody>
                             <%for(Alumno alumno : listaAlumnosPorUniversidad){%>
-                            <tr>
-
-                                <td><%=alumno.getNombre()%></td>
-                                <td><%=alumno.getApellido()%></td>
-                                <td><%=alumno.getEdad()%></td>
-                                <td><%=alumno.getCodigo()%></td>
-                                <td><%=alumno.getPromedioPonderado()%></td>
-                                <td><%=alumno.getCondicion()%></td>
-                                <td><a class="btn btn-primary" href="<%=request.getContextPath()%>/AlumnoServlet?action=editar&id=<%=alumno.getIdParticipante()%>"><span class="fa fa-edit"></span></a></td>
-                                <td><a class="btn btn-danger"  href="<%=request.getContextPath()%>/ParticipanteServlet?action=borrar&id=<%=alumno.getIdParticipante()%>"><span class="fa fa-trash"></span></a></td>
-                            </tr>
+                                <%if(alumno.getCondicion().equalsIgnoreCase("Normal")){%>
+                                    <tr>
+                                        <td style="color: blue"><%=alumno.getNombre()%></td>
+                                        <td style="color: blue"><%=alumno.getApellido()%></td>
+                                        <td style="color: blue"><%=alumno.getEdad()%></td>
+                                        <td style="color: blue"><%=alumno.getCodigo()%></td>
+                                        <td style="color: blue"><%=alumno.getPromedioPonderado()%></td>
+                                        <td style="color: blue"><%=alumno.getCondicion()%></td>
+                                        <td><a class="btn btn-primary" href="<%=request.getContextPath()%>/AlumnoServlet?action=editar&id=<%=alumno.getIdParticipante()%>"><span class="fa fa-edit"></span></a></td>
+                                        <td><a class="btn btn-danger"  href="<%=request.getContextPath()%>/AlumnoServlet?action=borrar&id=<%=alumno.getIdParticipante()%>"><span class="fa fa-trash"></span></a></td>
+                                    </tr>
+                                <%}else{%>
+                                    <tr>
+                                        <td style="color: red"><%=alumno.getNombre()%></td>
+                                        <td style="color: red"><%=alumno.getApellido()%></td>
+                                        <td style="color: red"><%=alumno.getEdad()%></td>
+                                        <td style="color: red"><%=alumno.getCodigo()%></td>
+                                        <td style="color: red"><%=alumno.getPromedioPonderado()%></td>
+                                        <td style="color: red"><%=alumno.getCondicion()%></td>
+                                        <td><a class="btn btn-primary" href="<%=request.getContextPath()%>/AlumnoServlet?action=editar&id=<%=alumno.getIdParticipante()%>"><span class="fa fa-edit"></span></a></td>
+                                        <td><a class="btn btn-danger"  href="<%=request.getContextPath()%>/AlumnoServlet?action=borrar&id=<%=alumno.getIdParticipante()%>"><span class="fa fa-trash"></span></a></td>
+                                    </tr>
+                                <%}%>
                             <%}%>
                         </tbody>
                     </table>

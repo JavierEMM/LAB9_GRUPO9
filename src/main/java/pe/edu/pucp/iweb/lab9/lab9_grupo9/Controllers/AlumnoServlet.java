@@ -20,10 +20,20 @@ public class AlumnoServlet extends HttpServlet {
                 int idUniversidad1 = Integer.parseInt(idUniversidadStr);
                 request.setAttribute("listaAlumnosPorUniversidad",alumnoDao.listaAlumnos(idUniversidad1));
                 request.setAttribute("vista","mostrar");
+                request.setAttribute("idUniversidad",idUniversidadStr);
                 view = request.getRequestDispatcher("/alumnos.jsp");
                 view.forward(request, response);
                 break;
             case "editar":
+
+
+
+
+
+                break;
+
+            case "crear":
+
 
 
 
