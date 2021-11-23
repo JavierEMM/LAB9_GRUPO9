@@ -46,10 +46,24 @@ public class ParticipanteDao{
 
     public Participante obtenerParticipantePorId(int idParticipante){
         Participante participante = null;
+        String sentenciaSQL = "SELECT participante.nombre,apellidos,edad,genero,p.nombre FROM participante\n"+
+                "INNER JOIN pais p ON (participante.pais_idpais = p.idpais) WHERE participante.idparticipante = ?";
 
-
-
+        try (Connection conn = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt = conn.prepareStatement(sentenciaSQL);
+             ){
+            pstmt.setInt(1, idParticipante);
+            ResultSet rs = pstmt.executeQuery();
+            rs.next();
+            String nombre = rs.getString(1);
+            String apellido = rs.getString(2);
+            int edad = rs.getInt(3);
+            String genero = rs.getString(4);
+            String nacionalidad = rs.getString(5);
+            participante = new Participante(nombre,apellido,edad,genero,nacionalidad);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return participante;
     }
-
 }
