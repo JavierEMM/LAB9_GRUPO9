@@ -9,23 +9,17 @@ public class ParticipanteDao extends BaseDao{
 
     public ArrayList<Participante> listaParticipantes(){
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-
-
         ArrayList<Participante> listita = new ArrayList<>();
-
         String sentenciaSQL = "SELECT participante.nombre,apellidos,edad,genero,p.nombre FROM participante\n"+
                                 "INNER JOIN pais p ON (participante.pais_idpais = p.idpais);";
-
         String url = "jdbc:mysql://localhost:3306/lab9?serverTimezone=America/Lima";
-
         try (Connection conn = DriverManager.getConnection(url, "root", "root");
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sentenciaSQL)) {
-
             while (rs.next()) {
                 String nombre = rs.getString(1);
                 String apellido = rs.getString(2);
@@ -39,10 +33,6 @@ public class ParticipanteDao extends BaseDao{
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return listita;
     }
-
-
-
 }

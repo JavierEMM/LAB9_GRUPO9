@@ -2,7 +2,7 @@
 <%@ page import="pe.edu.pucp.iweb.lab9.lab9_grupo9.Beans.Participante" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="mensaje" scope="request" type="java.lang.String" class="java.lang.String"/>
-<% ArrayList<Participante> listaParticipantes = (ArrayList) request.getAttribute("listaParticipantes");%>
+<% ArrayList<Participante> listaParticipantes = (ArrayList<Participante>) request.getAttribute("listaParticipantes");%>
 <html>
     <jsp:include page="/static/head.jsp">
         <jsp:param name="title" value="Lista de Participantes"/>

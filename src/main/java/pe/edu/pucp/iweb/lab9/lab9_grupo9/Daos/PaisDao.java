@@ -41,4 +41,32 @@ public class PaisDao extends BaseDao{
         }
         return listaPaises;
     }
+    public void añadirPais(String nombre, int poblacion, String tamano, int continente_idcontinente){
+        String sql = "INSERT INTO pais (nombre, poblacion, tamanho, continente_idcontinente) VALUES (?, ?, ?, ?);";
+        try(Connection conn = this.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+        ){
+            pstmt.setString(1,nombre);
+            pstmt.setInt(2,poblacion);
+            pstmt.setString(3,tamano);
+            pstmt.setInt(4,continente_idcontinente);
+            pstmt.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+    public void editarPais(String nombre, int poblacion, String tamano, int idpais){
+        String sql = "UPDATE pais set nombre = ?, poblacion = ?, tamanho = ? where idpais = ?";
+        try(Connection conn = this.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+        ){
+            pstmt.setString(1,nombre);
+            pstmt.setInt(2,poblacion);
+            pstmt.setString(3,tamano);
+            pstmt.setInt(4,idpais);
+            pstmt.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
 }
