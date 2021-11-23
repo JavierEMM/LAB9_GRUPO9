@@ -4,6 +4,13 @@ public class Continente {
     private int idcontinente;
     private String nombre;
 
+    public Continente(){}
+
+    public Continente(int idcontinente, String nombre) {
+        this.idcontinente = idcontinente;
+        this.nombre = nombre;
+    }
+
     public int getIdcontinente() {
         return idcontinente;
     }

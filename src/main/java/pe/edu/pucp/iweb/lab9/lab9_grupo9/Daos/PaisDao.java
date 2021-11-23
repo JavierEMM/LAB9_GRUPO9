@@ -55,7 +55,7 @@ public class PaisDao extends BaseDao{
             e.printStackTrace();
         }
     }
-    public void editarPais(String nombre, int poblacion, String tamano, int idpais){
+    public void editarPais(String nombre, int poblacion, String tamano, String idpais){
         String sql = "UPDATE pais set nombre = ?, poblacion = ?, tamanho = ? where idpais = ?";
         try(Connection conn = this.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -63,7 +63,18 @@ public class PaisDao extends BaseDao{
             pstmt.setString(1,nombre);
             pstmt.setInt(2,poblacion);
             pstmt.setString(3,tamano);
-            pstmt.setInt(4,idpais);
+            pstmt.setString(4,idpais);
+            pstmt.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+    public void eliminarPais(String idPais){
+        String sql = "DELETE FROM pais WHERE idpais = ?";
+        try(Connection conn = this.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+        ){
+            pstmt.setString(1,idPais);
             pstmt.executeUpdate();
         }catch (SQLException e){
             e.printStackTrace();

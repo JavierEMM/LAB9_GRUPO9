@@ -1,7 +1,9 @@
 <%@ page import="pe.edu.pucp.iweb.lab9.lab9_grupo9.Beans.Pais" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<%Pais pais = (Pais) request.getAttribute("Pais");%>
+<%
+    Pais pais = (Pais) request.getAttribute("pais");
+%>
 
 <html>
 <jsp:include page="/static/head.jsp">
@@ -29,7 +31,7 @@
                 </div>
                 <div class="form-group">
                     <label for="poblacion">Poblacion</label>
-                    <input class="form-control" type="text" value=" <%=pais.getCantidadPoblacion()%>" name="poblacion" id="poblacion">
+                    <input class="form-control" type="text" value="<%=pais.getCantidadPoblacion()%>" name="poblacion" id="poblacion">
                 </div>
                 <div class="form-group">
                     <label for="tamano">Tamaño del pais</label>

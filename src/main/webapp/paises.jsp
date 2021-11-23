@@ -62,7 +62,7 @@
                         <button type="button" class="btn btn-primary" onclick="window.location.assign('<%=request.getContextPath()%>/PaisServlet?action=editar&id=<%=pais.getIdPais()%>')" >Editar</button>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-danger">Eliminar</button>
+                        <button type="button" class="btn btn-danger" onclick="window.location.assign('<%=request.getContextPath()%>/PaisServlet?action=eliminar&id=<%=pais.getIdPais()%>')">Eliminar</button>
                     </td>
                 </tr>
                 <%}%>
