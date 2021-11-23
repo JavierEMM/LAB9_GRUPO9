@@ -53,15 +53,61 @@
                 </thead>
                 <tbody>
                 <%for(Universidad universidad : listaUniversidades){%>
-                <tr>
+                <%if(universidad.getContinente().getNombre().equalsIgnoreCase("Africa")){%>
+                <tr class="fila-green">
                     <td><%=universidad.getNombre()%></td>
                     <td><%=universidad.getPais().getNombre()%></td>
                     <td><%=universidad.getRanking()%></td>
                     <td><%=universidad.getNumeroAlumnos()%></td>
-                    <td><%=universidad.getFoto()%></td>
+                    <td><img src="<%=universidad.getFoto()%>"/></td>
                     <td><a class="btn btn-primary" href="<%=request.getContextPath()%>/UniversidadServlet?action=editar&id=<%=universidad.getIdUniversidad()%>"><span class="fa fa-edit"></span></a></td>
                     <td><a class="btn btn-danger" href="<%=request.getContextPath()%>/UniversidadServlet?action=borrar&id=<%=universidad.getIdUniversidad()%>"><span class="fa fa-trash"></span></a></td>
                 </tr>
+                <%}%>
+                <%if(universidad.getContinente().getNombre().equalsIgnoreCase("America")){%>
+                <tr class="fila-yellow">
+                    <td><%=universidad.getNombre()%></td>
+                    <td><%=universidad.getPais().getNombre()%></td>
+                    <td><%=universidad.getRanking()%></td>
+                    <td><%=universidad.getNumeroAlumnos()%></td>
+                    <td><img src="<%=universidad.getFoto()%>"/></td>
+                    <td><a class="btn btn-primary" href="<%=request.getContextPath()%>/UniversidadServlet?action=editar&id=<%=universidad.getIdUniversidad()%>"><span class="fa fa-edit"></span></a></td>
+                    <td><a class="btn btn-danger" href="<%=request.getContextPath()%>/UniversidadServlet?action=borrar&id=<%=universidad.getIdUniversidad()%>"><span class="fa fa-trash"></span></a></td>
+                </tr>
+                <%}%>
+                <%if(universidad.getContinente().getNombre().equalsIgnoreCase("Oceania")){%>
+                <tr class="fila-purple">
+                    <td><%=universidad.getNombre()%></td>
+                    <td><%=universidad.getPais().getNombre()%></td>
+                    <td><%=universidad.getRanking()%></td>
+                    <td><%=universidad.getNumeroAlumnos()%></td>
+                    <td><img src="<%=universidad.getFoto()%>"/></td>
+                    <td><a class="btn btn-primary" href="<%=request.getContextPath()%>/UniversidadServlet?action=editar&id=<%=universidad.getIdUniversidad()%>"><span class="fa fa-edit"></span></a></td>
+                    <td><a class="btn btn-danger" href="<%=request.getContextPath()%>/UniversidadServlet?action=borrar&id=<%=universidad.getIdUniversidad()%>"><span class="fa fa-trash"></span></a></td>
+                </tr>
+                <%}%>
+                <%if(universidad.getContinente().getNombre().equalsIgnoreCase("Europa")){%>
+                <tr class="fila-blue">
+                    <td><%=universidad.getNombre()%></td>
+                    <td><%=universidad.getPais().getNombre()%></td>
+                    <td><%=universidad.getRanking()%></td>
+                    <td><%=universidad.getNumeroAlumnos()%></td>
+                    <td><img src="<%=universidad.getFoto()%>"/></td>
+                    <td><a class="btn btn-primary" href="<%=request.getContextPath()%>/UniversidadServlet?action=editar&id=<%=universidad.getIdUniversidad()%>"><span class="fa fa-edit"></span></a></td>
+                    <td><a class="btn btn-danger" href="<%=request.getContextPath()%>/UniversidadServlet?action=borrar&id=<%=universidad.getIdUniversidad()%>"><span class="fa fa-trash"></span></a></td>
+                </tr>
+                <%}%>
+                <%if(universidad.getContinente().getNombre().equalsIgnoreCase("Asia")){%>
+                <tr class="fila-red">
+                    <td><%=universidad.getNombre()%></td>
+                    <td><%=universidad.getPais().getNombre()%></td>
+                    <td><%=universidad.getRanking()%></td>
+                    <td><%=universidad.getNumeroAlumnos()%></td>
+                    <td><img src="<%=universidad.getFoto()%>"/></td>
+                    <td><a class="btn btn-primary" href="<%=request.getContextPath()%>/UniversidadServlet?action=editar&id=<%=universidad.getIdUniversidad()%>"><span class="fa fa-edit"></span></a></td>
+                    <td><a class="btn btn-danger" href="<%=request.getContextPath()%>/UniversidadServlet?action=borrar&id=<%=universidad.getIdUniversidad()%>"><span class="fa fa-trash"></span></a></td>
+                </tr>
+                <%}%>
                 <%}%>
                 </tbody>
             </table>

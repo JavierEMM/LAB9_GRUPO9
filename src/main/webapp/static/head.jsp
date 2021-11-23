@@ -10,3 +10,24 @@
     <title><%=request.getParameter("title")%>
     </title>
 </head>
+<style>
+    .fila-green {
+        background-color: yellowgreen;
+    }
+
+    .fila-red {
+        background-color: darkred;
+    }
+
+    .fila-blue {
+        background-color: darkblue;
+    }
+
+    .fila-purple {
+        background-color: purple;
+    }
+
+    .fila-yellow {
+        background-color: yellow;
+    }
+</style>

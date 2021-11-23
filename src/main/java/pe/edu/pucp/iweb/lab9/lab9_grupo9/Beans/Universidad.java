@@ -4,18 +4,20 @@ public class Universidad {
     private int idUniversidad;
     private String nombre;
     private Pais pais;
+    private Continente continente;
     private int ranking;
     private int numeroAlumnos;
 
     public Universidad() {
     }
-    public Universidad(int idUniversidad,String nombre, Pais pais, int ranking, int numeroAlumnos, String foto) {
+    public Universidad(int idUniversidad,String nombre, Pais pais, int ranking, int numeroAlumnos, String foto, Continente continente) {
         this.idUniversidad=idUniversidad;
         this.nombre = nombre;
         this.pais = pais;
         this.ranking = ranking;
         this.numeroAlumnos = numeroAlumnos;
         this.foto = foto;
+        this.continente=continente;
     }
 
     private String foto;
@@ -70,4 +72,11 @@ public class Universidad {
         this.ranking = ranking;
     }
 
+    public Continente getContinente() {
+        return continente;
+    }
+
+    public void setContinente(Continente continente) {
+        this.continente = continente;
+    }
 }

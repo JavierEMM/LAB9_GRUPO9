@@ -7,6 +7,8 @@ import pe.edu.pucp.iweb.lab9.lab9_grupo9.Daos.PaisDao;
 import pe.edu.pucp.iweb.lab9.lab9_grupo9.Daos.ParticipanteDao;
 import pe.edu.pucp.iweb.lab9.lab9_grupo9.Daos.UniversidadDao;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.print.DocFlavor;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -18,14 +20,22 @@ import java.util.ArrayList;
 public class UniversidadServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String accion = request.getParameter("action") != null ? request.getParameter("action") : "listar";
+
+        PaisDao paisDao = new PaisDao();
         UniversidadDao universidadDao = new UniversidadDao();
+        ArrayList<Pais> listaPaises = paisDao.listarPaises();
+
+        String accion = request.getParameter("action") != null ? request.getParameter("action") : "listar";
         String idUniversidad = request.getParameter("id") != null ? request.getParameter("id") : "0";
         RequestDispatcher view;
+
         switch (accion){
             case "listar":
+                String msg = request.getParameter("msg") != null ? request.getParameter("msg") : "";
                 try {
+                    System.out.println(universidadDao.listarUniversidades().get(1).getContinente().getNombre());
                     request.setAttribute("listaUniversidades",universidadDao.listarUniversidades());
+
                 } catch (SQLException e) {
                     response.sendRedirect(request.getContextPath()+"/UniversidadServlet?msg=sql");
                 }
@@ -33,24 +43,21 @@ public class UniversidadServlet extends HttpServlet {
                 view.forward(request, response);
                 break;
             case "crear":
+                request.setAttribute("listaPaises",paisDao.listarPaises());
+                request.setAttribute("vista","crear");
+                view = request.getRequestDispatcher("/editaruniversidades.jsp");
+                view.forward(request, response);
                 break;
             case "editar":
                 Universidad universidad = null;
                 request.setAttribute("vista","editar");
                 try {
-                    if(idUniversidad.equalsIgnoreCase("0")){
-                        response.sendRedirect(request.getContextPath()+"/UniversidadServlet?msg=nulo");
-                    }else{
-                        universidad = universidadDao.obtenerUniversidadPorId(Integer.parseInt(idUniversidad));
-                        request.setAttribute("universidad",universidad);
-                        PaisDao paisDao = new PaisDao();
-                        ArrayList<Pais> listaPaises = paisDao.listarPaises();
-                        request.setAttribute("listaPaises",listaPaises);
-                        view = request.getRequestDispatcher("/editaruniversidades.jsp");
-                        view.forward(request, response);
-                    }
+                    universidad = universidadDao.obtenerUniversidadPorId(Integer.parseInt(idUniversidad));
+                    request.setAttribute("universidad",universidad);
+                    request.setAttribute("listaPaises",listaPaises);
+                    view = request.getRequestDispatcher("/editaruniversidades.jsp");
+                    view.forward(request, response);
                 } catch (SQLException e) {
-                    System.out.println(e);
                     response.sendRedirect(request.getContextPath()+"/UniversidadServlet?msg=sql");
                 }
                 break;
@@ -66,35 +73,56 @@ public class UniversidadServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String accion = request.getParameter("action") != null ? request.getParameter("action") : "listar";
-
+        String ranking,foto,pais,nombreUniversidad,idUniversidadStr;
         UniversidadDao universidadDao = new UniversidadDao();
         switch (accion){
             case "listar":
-
-
+                response.sendRedirect(request.getContextPath() + "/UniversidadServlet");
                 break;
-
             case "crear":
-
-
-
+                nombreUniversidad = request.getParameter("nombreUniversidad")  != "" ? request.getParameter("nombreUniversidad") : "";
+                ranking = request.getParameter("ranking") != "" ? request.getParameter("ranking") : "0";
+                foto = request.getParameter("Foto") != "" ? request.getParameter("Foto") : "";
+                pais = request.getParameter("idPais");
+                try {
+                    if(nombreUniversidad.equalsIgnoreCase("")){
+                        response.sendRedirect(request.getContextPath() +"/UniversidadServlet?msg=nombrevacio");
+                    }else if(ranking.equalsIgnoreCase("0")) {
+                        response.sendRedirect(request.getContextPath() + "/UniversidadServlet?msg=rankingvacio");
+                    } else{
+                        if (universidadDao.validarNombre(nombreUniversidad)){
+                            universidadDao.crearUniversidad(nombreUniversidad,Integer.parseInt(ranking),foto, Integer.parseInt(pais));
+                            response.sendRedirect(request.getContextPath() +"/UniversidadServlet");
+                        }else{
+                            response.sendRedirect(request.getContextPath() + "/UniversidadServlet?msg=nombreinvalido");
+                        }
+                    }
+                } catch (SQLException e) {
+                    response.sendRedirect(request.getContextPath() +"/UniversidadServlet?msg=sql");
+                }
                 break;
 
             case "editar":
-                String idUniversidadStr = request.getParameter("id");
-                String nombreUniversidad = request.getParameter("nombreUniversidad")  != null ? request.getParameter("nombreUniversidad") : "";
-                String ranking = request.getParameter("ranking")  != null ? request.getParameter("ranking") : "";
-                String foto = request.getParameter("Foto") != null ? request.getParameter("Foto") : "";
-                String pais = request.getParameter("idPais") != "-1" ? request.getParameter("idPais") : "";
-                try{
-                    if(!nombreUniversidad.equalsIgnoreCase("") && !ranking.equalsIgnoreCase("") && !pais.equalsIgnoreCase("")){
-                        universidadDao.editarUniversidad(Integer.parseInt(idUniversidadStr), nombreUniversidad,Integer.parseInt(ranking),foto,Integer.parseInt(pais));
-                        response.sendRedirect(request.getContextPath() +"/UniversidadServlet");
-                    }else{
-                        response.sendRedirect(request.getContextPath() +"/UniversidadServlet?msg=in");
+                idUniversidadStr = request.getParameter("id");
+                nombreUniversidad = request.getParameter("nombreUniversidad")  != "" ? request.getParameter("nombreUniversidad") : "";
+                ranking = request.getParameter("ranking")  != "" ? request.getParameter("ranking") : "0";
+                foto = request.getParameter("Foto") != "" ? request.getParameter("Foto") : "";
+                pais = request.getParameter("idPais");
+                try {
+                    if(nombreUniversidad.equalsIgnoreCase("")){
+                        response.sendRedirect(request.getContextPath() +"/UniversidadServlet?msg=nombrevacio");
+                    }else if(ranking.equalsIgnoreCase("0")) {
+                        response.sendRedirect(request.getContextPath() + "/UniversidadServlet?msg=rankingvacio");
+                    } else{
+                        if (universidadDao.validarNombre(nombreUniversidad)){
+                            universidadDao.editarUniversidad(Integer.parseInt(idUniversidadStr), nombreUniversidad,Integer.parseInt(ranking),foto,Integer.parseInt(pais));
+                            response.sendRedirect(request.getContextPath() +"/UniversidadServlet");
+                        }else{
+                            response.sendRedirect(request.getContextPath() + "/UniversidadServlet?msg=nombreinvalido");
+                        }
                     }
-                }catch (SQLException e){
-                    response.sendRedirect("/UniversidadServlet?msg=sql");
+                } catch (SQLException e) {
+                    response.sendRedirect(request.getContextPath() +"/UniversidadServlet?msg=sql");
                 }
         }
 
