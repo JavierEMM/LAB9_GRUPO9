@@ -10,11 +10,6 @@ import java.util.ArrayList;
 public class AlumnoDao extends  BaseDao {
     public ArrayList<Alumno> listaAlumnos (int idUniversidad){
         ArrayList<Alumno> listita = new ArrayList<>();
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
 
         String sentenciaSQL = "SELECT participante.nombre,participante.apellidos,participante.edad,alumno.codigo,alumno.promedio_ponderado,alumno.condicion,participante.idparticipante FROM participante\n"+
                 "INNER JOIN alumno ON (participante.idparticipante = alumno.participante_idparticipante)\n"+
@@ -74,11 +69,6 @@ public class AlumnoDao extends  BaseDao {
 
     public ArrayList<Participante> listaParticipantesCrear (int idUniversidad){
         ArrayList<Participante> listita = new ArrayList<>();
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
 
         String sentenciaSQL = "SELECT participante.idparticipante,participante.nombre FROM participante\n"+
                                 "LEFT JOIN alumno ON (participante.idparticipante = alumno.participante_idparticipante)\n"+
@@ -104,11 +94,6 @@ public class AlumnoDao extends  BaseDao {
     }
 
     public  void insertAlumno(int idParticipante, int codigoParticipante, double promedioParticipante,int idUniversidad) {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
 
         String sentenciaSQL = "INSERT INTO alumno (codigo,promedio_ponderado,condicion,participante_idparticipante,universidad_iduniversidad)\n"+
                                 "VALUES (?,?,?,?,?);";
@@ -131,11 +116,6 @@ public class AlumnoDao extends  BaseDao {
     }
 
     public Alumno obtenerAlumnoPorId(int idParticipante){
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
 
         Alumno alumno = null;
         String sentenciaSQL =   "SELECT p.nombre,p.apellidos,p.edad,a.codigo,a.promedio_ponderado,a.condicion FROM alumno a\n"+
@@ -165,11 +145,6 @@ public class AlumnoDao extends  BaseDao {
 
 
     public  void updateAlumno(Alumno alumno) {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
 
         String sentenciaSQL = "UPDATE participante \n" +
                 "INNER JOIN alumno a ON (participante.idparticipante = a.participante_idparticipante)\n" +

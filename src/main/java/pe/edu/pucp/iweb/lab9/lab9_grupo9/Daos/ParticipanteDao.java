@@ -6,25 +6,16 @@ import pe.edu.pucp.iweb.lab9.lab9_grupo9.DTO.ParticipanteDTO;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class ParticipanteDao{
-    String user = "root";
-    String pass = "root";
-    String url = "jdbc:mysql://localhost:3306/lab9?serverTimezone=America/Lima";
+public class ParticipanteDao extends BaseDao{
 
     public ArrayList<Participante> listaParticipantes(){
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
 
         ArrayList<Participante> listita = new ArrayList<>();
 
         String sentenciaSQL = "SELECT participante.nombre,apellidos,edad,genero,p.nombre,idparticipante FROM participante\n"+
                                 "INNER JOIN pais p ON (participante.pais_idpais = p.idpais);";
 
-        try (Connection conn = DriverManager.getConnection(url, user, pass);
+        try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sentenciaSQL)) {
 
@@ -48,16 +39,12 @@ public class ParticipanteDao{
 
 
     public Participante obtenerParticipantePorId(int idParticipante){
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+
 
         Participante participante = null;
         String sentenciaSQL = "SELECT participante.nombre,apellidos,edad,genero,p.nombre FROM participante\n"+
                 "INNER JOIN pais p ON (participante.pais_idpais = p.idpais) WHERE participante.idparticipante = ?";
-        try (Connection conn = DriverManager.getConnection(url, user, pass);
+        try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sentenciaSQL);){
             pstmt.setInt(1, idParticipante);
             ResultSet rs = pstmt.executeQuery();
@@ -108,15 +95,10 @@ public class ParticipanteDao{
     }
 
     public void editarParticipante(ParticipanteDTO participante){
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
 
         String sentenciaSQL = "UPDATE participante SET nombre = ?, apellidos = ?,edad = ?,genero = ?,pais_idpais = ? WHERE idparticipante = ?;";
 
-        try (Connection connection = DriverManager.getConnection(url, user, pass);
+        try (Connection connection = this.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sentenciaSQL)) {
             pstmt.setString(1,participante.getNombre());
             pstmt.setString(2,participante.getApellido());
@@ -132,14 +114,10 @@ public class ParticipanteDao{
     }
 
     public void crearParticipante(ParticipanteDTO participante){
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+
 
         String sentenciaSQL = "INSERT INTO participante (nombre, apellidos, edad, genero, pais_idpais) VALUES (?,?,?,?,?)";
-        try (Connection connection = DriverManager.getConnection(url, user, pass);
+        try (Connection connection = this.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sentenciaSQL)) {
             pstmt.setString(1,participante.getNombre());
             pstmt.setString(2,participante.getApellido());
@@ -154,18 +132,13 @@ public class ParticipanteDao{
 
     public boolean participantePerteneceUniversidad(int idParticipante){
         boolean pertenece = false;
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
 
         String sentenciaSQL = "SELECT p.idparticipante,p.nombre,p.apellidos,p.edad,p.genero,codigo,promedio_ponderado,condicion,u.nombre FROM alumno\n"+
                                 "INNER JOIN participante p ON (alumno.participante_idparticipante = p.idparticipante)\n"+
                                 "INNER JOIN universidad u ON (alumno.universidad_iduniversidad = u.iduniversidad)\n"+
                                 "WHERE p.idparticipante = ?;";
 
-        try (Connection connection = DriverManager.getConnection(url, user, pass);
+        try (Connection connection = this.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sentenciaSQL);) {
 
             pstmt.setInt(1,idParticipante);
@@ -182,15 +155,10 @@ public class ParticipanteDao{
     }
 
     public void borrarParticipante(int idParticipante){
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
 
         String sentenciaSQL = "DELETE FROM participante WHERE idparticipante = ?";
 
-        try (Connection connection = DriverManager.getConnection(url, user, pass);
+        try (Connection connection = this.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sentenciaSQL);) {
             pstmt.setInt(1,idParticipante);
             pstmt.executeUpdate();
@@ -202,14 +170,9 @@ public class ParticipanteDao{
 
     public double promedioEdadParticipantes(){
         double promedio = 0.0;
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
 
         String sentenciaSQL = "SELECT sum(edad)/count(edad) FROM participante";
-        try (Connection conn = DriverManager.getConnection(url, user, pass);
+        try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sentenciaSQL)) {
 
@@ -227,17 +190,13 @@ public class ParticipanteDao{
 
     public ArrayList<Double> porcentajeHombresYMujeres(){
         ArrayList<Double> porcentajeHombreMujer = new ArrayList<>();
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+
 
         String sentenciaSQL1 = "SELECT count(edad) FROM participante;";
         String sentenciaSQL2 = "SELECT genero,count(*) FROM participante\n"+
                                 "GROUP BY genero";
 
-        try (Connection conn = DriverManager.getConnection(url, user, pass);
+        try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sentenciaSQL1)) {
 
@@ -271,11 +230,7 @@ public class ParticipanteDao{
 
     public String paisMayorNumeroParticipantes(){
         String nombrePais = null;
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+
 
         String sentenciaSQL = "SELECT p.nombre FROM participante\n"+
                                 "INNER JOIN pais p ON (participante.pais_idpais = p.idpais)\n"+
@@ -283,7 +238,7 @@ public class ParticipanteDao{
                                 "ORDER BY count(*) DESC, p.nombre\n"+
                                 "LIMIT 1;";
 
-        try (Connection conn = DriverManager.getConnection(url, user, pass);
+        try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sentenciaSQL)) {
             rs.next();
