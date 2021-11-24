@@ -49,7 +49,7 @@
                                         <td style="color: blue"><%=alumno.getPromedioPonderado()%></td>
                                         <td style="color: blue"><%=alumno.getCondicion()%></td>
                                         <td><a class="btn btn-primary" href="<%=request.getContextPath()%>/AlumnoServlet?action=editar&id=<%=alumno.getIdParticipante()%>"><span class="fa fa-edit"></span></a></td>
-                                        <td><a class="btn btn-danger"  href="<%=request.getContextPath()%>/AlumnoServlet?action=borrar&id=<%=alumno.getIdParticipante()%>"><span class="fa fa-trash"></span></a></td>
+                                        <td><a class="btn btn-danger"  href="<%=request.getContextPath()%>/AlumnoServlet?action=borrar&id=<%=alumno.getIdParticipante()%>&condicion=<%=alumno.getCondicion()%>"><span class="fa fa-trash"></span></a></td>
                                     </tr>
                                 <%}else{%>
                                     <tr>
@@ -60,7 +60,7 @@
                                         <td style="color: red"><%=alumno.getPromedioPonderado()%></td>
                                         <td style="color: red"><%=alumno.getCondicion()%></td>
                                         <td><a class="btn btn-primary" href="<%=request.getContextPath()%>/AlumnoServlet?action=editar&id=<%=alumno.getIdParticipante()%>"><span class="fa fa-edit"></span></a></td>
-                                        <td><a class="btn btn-danger"  href="<%=request.getContextPath()%>/AlumnoServlet?action=borrar&id=<%=alumno.getIdParticipante()%>"><span class="fa fa-trash"></span></a></td>
+                                        <td><a class="btn btn-danger"  href="<%=request.getContextPath()%>/AlumnoServlet?action=borrar&id=<%=alumno.getIdParticipante()%>&condicion=<%=alumno.getCondicion()%>"><span class="fa fa-trash"></span></a></td>
                                     </tr>
                                 <%}%>
                             <%}%>
