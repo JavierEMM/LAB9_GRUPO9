@@ -14,25 +14,25 @@ public class UniversidadDao extends BaseDao{
         ArrayList<Universidad> listaUniversidad = new ArrayList<>();
         String sql="";
         if(filter.equalsIgnoreCase("nombre")){
-            sql  =  "SELECT u.iduniversidad,u.nombre,u.ranking,count(a.participante_idparticipante),u.foto,p.nombre,c.nombre FROM alumno a RIGHT JOIN universidad u ON u.iduniversidad= a.universidad_iduniversidad\n" +
+            sql  =  "SELECT u.iduniversidad,u.nombre,u.ranking,count(a.participante_idparticipante),u.foto,p.nombre,c.nombre,p.idpais FROM alumno a RIGHT JOIN universidad u ON u.iduniversidad= a.universidad_iduniversidad\n" +
                     "INNER JOIN pais p ON p.idpais = u.pais_idpais\n" +
                     "INNER JOIN continente c ON c.idcontinente = p.continente_idcontinente\n" +
                     "GROUP BY iduniversidad\n" +
                     "ORDER BY u.nombre;";
         }else if(filter.equalsIgnoreCase("Pais")){
-            sql  =  "SELECT u.iduniversidad,u.nombre,u.ranking,count(a.participante_idparticipante),u.foto,p.nombre,c.nombre FROM alumno a RIGHT JOIN universidad u ON u.iduniversidad= a.universidad_iduniversidad\n" +
+            sql  =  "SELECT u.iduniversidad,u.nombre,u.ranking,count(a.participante_idparticipante),u.foto,p.nombre,c.nombre,p.idpais FROM alumno a RIGHT JOIN universidad u ON u.iduniversidad= a.universidad_iduniversidad\n" +
                     "INNER JOIN pais p ON p.idpais = u.pais_idpais\n" +
                     "INNER JOIN continente c ON c.idcontinente = p.continente_idcontinente\n" +
                     "GROUP BY iduniversidad\n" +
                     "ORDER BY u.ranking;";
         }else if(filter.equalsIgnoreCase("Alumnos")){
-            sql  =  "SELECT u.iduniversidad,u.nombre,u.ranking,count(a.participante_idparticipante),u.foto,p.nombre,c.nombre FROM alumno a RIGHT JOIN universidad u ON u.iduniversidad= a.universidad_iduniversidad\n" +
+            sql  =  "SELECT u.iduniversidad,u.nombre,u.ranking,count(a.participante_idparticipante),u.foto,p.nombre,c.nombre,p.idpais FROM alumno a RIGHT JOIN universidad u ON u.iduniversidad= a.universidad_iduniversidad\n" +
                     "INNER JOIN pais p ON p.idpais = u.pais_idpais\n" +
                     "INNER JOIN continente c ON c.idcontinente = p.continente_idcontinente\n" +
                     "GROUP BY iduniversidad\n" +
                     "ORDER BY count(a.participante_idparticipante);";
         }else{
-          sql  =  "SELECT u.iduniversidad,u.nombre,u.ranking,count(a.participante_idparticipante),u.foto,p.nombre,c.nombre FROM alumno a RIGHT JOIN universidad u ON u.iduniversidad= a.universidad_iduniversidad\n" +
+          sql  =  "SELECT u.iduniversidad,u.nombre,u.ranking,count(a.participante_idparticipante),u.foto,p.nombre,c.nombre,p.idpais FROM alumno a RIGHT JOIN universidad u ON u.iduniversidad= a.universidad_iduniversidad\n" +
                     "INNER JOIN pais p ON p.idpais = u.pais_idpais\n" +
                     "INNER JOIN continente c ON c.idcontinente = p.continente_idcontinente\n" +
                     "GROUP BY iduniversidad\n" +
@@ -52,6 +52,7 @@ public class UniversidadDao extends BaseDao{
                 String foto = rs.getString(5);
                 pais.setNombre(rs.getString(6));
                 continente.setNombre(rs.getString(7));
+                pais.setIdPais(rs.getInt(8));
                 listaUniversidad.add(new Universidad(idUniversidad, nombre, pais, ranking, numero_alumnos, foto,continente));
             }
         }
@@ -62,7 +63,7 @@ public class UniversidadDao extends BaseDao{
         Universidad universidad = new Universidad();
         Pais pais = new Pais();
         Continente continente = new Continente();
-        String sql = "SELECT u.nombre,u.ranking,count(a.participante_idparticipante),u.foto,p.nombre,c.nombre FROM alumno a RIGHT JOIN universidad u ON u.iduniversidad= a.universidad_iduniversidad\n" +
+        String sql = "SELECT u.nombre,u.ranking,count(a.participante_idparticipante),u.foto,p.nombre,c.nombre,p.idpais FROM alumno a RIGHT JOIN universidad u ON u.iduniversidad= a.universidad_iduniversidad\n" +
                 "INNER JOIN pais p ON p.idpais = u.pais_idpais\n" +
                 "INNER JOIN continente c ON c.idcontinente = p.continente_idcontinente " +
                 "GROUP BY iduniversidad " +
@@ -79,6 +80,7 @@ public class UniversidadDao extends BaseDao{
             String foto = rs.getString(4);
             pais.setNombre(rs.getString(5));
             continente.setNombre(rs.getString(6));
+            pais.setIdPais(rs.getInt(7));
             universidad= new Universidad(idUniversidad, nombre, pais, ranking, numero_alumnos, foto,continente);
         }
         return universidad;
@@ -96,7 +98,7 @@ public class UniversidadDao extends BaseDao{
             pstmt.executeUpdate();
         }
     }
-    public void borrarUniversidad(int id) throws SQLException{
+    public void borrarUniversidad(int idpais,int id) throws SQLException{
         String sql = "DELETE FROM universidad WHERE (iduniversidad = ?);";
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -108,6 +110,35 @@ public class UniversidadDao extends BaseDao{
             pstmt.setInt(1,id);
             pstmt.executeUpdate();
         }
+        if(!universidadPorPais(idpais)){
+            String sql4="DELETE a FROM alumno a INNER JOIN participante p\n" +
+                    "ON a.participante_idparticipante=p.idparticipante\n" +
+                    "WHERE p.pais_idpais = ?";
+            try (Connection conn=this.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql4)){
+                pstmt.setInt(1,idpais);
+                pstmt.executeUpdate();
+                PaisDao paisDao =  new PaisDao();
+                paisDao.eliminarPais(String.valueOf(idpais));
+            }
+        }
+    }
+    public boolean universidadPorPais(int idPais){
+        boolean tiene_universidad = false;
+        String sql="SELECT p.idpais FROM pais p INNER JOIN universidad u ON u.pais_idpais=p.idpais";
+        try(Connection conn = this.getConnection();
+        PreparedStatement pstmt = conn.prepareStatement(sql)){
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()){
+                if(rs.getInt(1) == idPais){
+                    tiene_universidad=true;
+                    break;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return tiene_universidad;
     }
 
     public void crearUniversidad(String nombre, int ranking,String foto,int idPais) throws SQLException{

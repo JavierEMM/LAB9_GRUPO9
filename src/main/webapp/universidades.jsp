@@ -81,7 +81,7 @@
                     <td style="text-align: center"><%=universidad.getNumeroAlumnos()%></td>
                     <td style="text-align: center"><img src="<%=universidad.getFoto()%>"/></td>
                     <td style="text-align: center"><a class="btn btn-primary" href="<%=request.getContextPath()%>/UniversidadServlet?action=editar&id=<%=universidad.getIdUniversidad()%>"><span class="fa fa-edit"></span></a></td>
-                    <td style="text-align: center"><a class="btn btn-danger" href="<%=request.getContextPath()%>/UniversidadServlet?action=borrar&id=<%=universidad.getIdUniversidad()%>"><span class="fa fa-trash"></span></a></td>
+                    <td style="text-align: center"><a class="btn btn-danger" href="<%=request.getContextPath()%>/UniversidadServlet?action=borrar&id=<%=universidad.getIdUniversidad()%>&idPais=<%=universidad.getPais().getIdPais()%>"><span class="fa fa-trash"></span></a></td>
                     <td><a class="btn btn-success" href="<%=request.getContextPath()%>/AlumnoServlet?action=mostrar&id=<%=universidad.getIdUniversidad()%>">Mostrar alumnos</a></td>
                 </tr>
                 <%}%>
@@ -93,7 +93,7 @@
                     <td style="text-align: center"><%=universidad.getNumeroAlumnos()%></td>
                     <td style="text-align: center"><img src="<%=universidad.getFoto()%>"/></td>
                     <td style="text-align: center"><a class="btn btn-primary" href="<%=request.getContextPath()%>/UniversidadServlet?action=editar&id=<%=universidad.getIdUniversidad()%>"><span class="fa fa-edit"></span></a></td>
-                    <td style="text-align: center"><a class="btn btn-danger" href="<%=request.getContextPath()%>/UniversidadServlet?action=borrar&id=<%=universidad.getIdUniversidad()%>"><span class="fa fa-trash"></span></a></td>
+                    <td style="text-align: center"><a class="btn btn-danger" href="<%=request.getContextPath()%>/UniversidadServlet?action=borrar&id=<%=universidad.getIdUniversidad()%>&idPais=<%=universidad.getPais().getIdPais()%>"><span class="fa fa-trash"></span></a></td>
                     <td><a class="btn btn-success" href="<%=request.getContextPath()%>/AlumnoServlet?action=mostrar&id=<%=universidad.getIdUniversidad()%>">Mostrar alumnos</a></td>
                 </tr>
                 <%}%>
@@ -105,7 +105,7 @@
                     <td style="text-align: center"><%=universidad.getNumeroAlumnos()%></td>
                     <td style="text-align: center"><img src="<%=universidad.getFoto()%>"/></td>
                     <td style="text-align: center"><a class="btn btn-primary" href="<%=request.getContextPath()%>/UniversidadServlet?action=editar&id=<%=universidad.getIdUniversidad()%>"><span class="fa fa-edit"></span></a></td>
-                    <td style="text-align: center"><a class="btn btn-danger" href="<%=request.getContextPath()%>/UniversidadServlet?action=borrar&id=<%=universidad.getIdUniversidad()%>"><span class="fa fa-trash"></span></a></td>
+                    <td style="text-align: center"><a class="btn btn-danger" href="<%=request.getContextPath()%>/UniversidadServlet?action=borrar&id=<%=universidad.getIdUniversidad()%>&idPais=<%=universidad.getPais().getIdPais()%>"><span class="fa fa-trash"></span></a></td>
                     <td><a class="btn btn-success" href="<%=request.getContextPath()%>/AlumnoServlet?action=mostrar&id=<%=universidad.getIdUniversidad()%>">Mostrar alumnos</a></td>
                 </tr>
                 <%}%>
@@ -117,7 +117,7 @@
                     <td style="text-align: center"><%=universidad.getNumeroAlumnos()%></td>
                     <td style="text-align: center"><img src="<%=universidad.getFoto()%>"/></td>
                     <td style="text-align: center"><a class="btn btn-primary" href="<%=request.getContextPath()%>/UniversidadServlet?action=editar&id=<%=universidad.getIdUniversidad()%>"><span class="fa fa-edit"></span></a></td>
-                    <td style="text-align: center"><a class="btn btn-danger" href="<%=request.getContextPath()%>/UniversidadServlet?action=borrar&id=<%=universidad.getIdUniversidad()%>"><span class="fa fa-trash"></span></a></td>
+                    <td style="text-align: center"><a class="btn btn-danger" href="<%=request.getContextPath()%>/UniversidadServlet?action=borrar&id=<%=universidad.getIdUniversidad()%>&idPais=<%=universidad.getPais().getIdPais()%>"><span class="fa fa-trash"></span></a></td>
                     <td><a class="btn btn-success" href="<%=request.getContextPath()%>/AlumnoServlet?action=mostrar&id=<%=universidad.getIdUniversidad()%>">Mostrar alumnos</a></td>
                 </tr>
                 <%}%>
@@ -129,7 +129,7 @@
                     <td style="text-align: center"><%=universidad.getNumeroAlumnos()%></td>
                     <td style="text-align: center"><img src="<%=universidad.getFoto()%>"/></td>
                     <td style="text-align: center"><a class="btn btn-primary" href="<%=request.getContextPath()%>/UniversidadServlet?action=editar&id=<%=universidad.getIdUniversidad()%>"><span class="fa fa-edit"></span></a></td>
-                    <td style="text-align: center"><a class="btn btn-danger" href="<%=request.getContextPath()%>/UniversidadServlet?action=borrar&id=<%=universidad.getIdUniversidad()%>"><span class="fa fa-trash"></span></a></td>
+                    <td style="text-align: center"><a class="btn btn-danger" href="<%=request.getContextPath()%>/UniversidadServlet?action=borrar&id=<%=universidad.getIdUniversidad()%>&idPais=<%=universidad.getPais().getIdPais()%>"><span class="fa fa-trash"></span></a></td>
                     <td><a class="btn btn-success" href="<%=request.getContextPath()%>/AlumnoServlet?action=mostrar&id=<%=universidad.getIdUniversidad()%>">Mostrar alumnos</a></td>
                 </tr>
                 <%}%>
