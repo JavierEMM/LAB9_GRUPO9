@@ -26,9 +26,7 @@ public class AlumnoServlet extends HttpServlet {
                 view.forward(request, response);
                 break;
             case "editar":
-                String idAlumnoEditar = request.getParameter("id");
-                alumnoDao.editarCondicion(idAlumnoEditar);
-                response.sendRedirect(request.getContextPath()+"/UniversidadServlet");
+
                 break;
             case "crear":
 
@@ -38,6 +36,9 @@ public class AlumnoServlet extends HttpServlet {
 
                 break;
             case "borrar":
+                String idAlumnoEditar = request.getParameter("id");
+                alumnoDao.editarCondicion(idAlumnoEditar);
+                response.sendRedirect(request.getContextPath()+"/UniversidadServlet");
                 String idAlumnoBorrar = request.getParameter("id");
                 alumnoDao.borrarAlumno(idAlumnoBorrar);
                 ParticipanteDao participanteDao = new ParticipanteDao();
