@@ -5,6 +5,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="mensaje" scope="request" type="java.lang.String" class="java.lang.String"/>
 <% ArrayList<Pais> listaPaises = (ArrayList<Pais>) request.getAttribute("listaPaises");
+    String msg = (String) request.getAttribute("msg");
 %>
 
 
@@ -26,6 +27,36 @@
     <jsp:include page="/includes/navbar.jsp">
         <jsp:param name="page" value="paises"/>
     </jsp:include>
+
+    <% if (msg.equals("nombrevacio")) { %>
+    <div class="alert alert-danger" role="alert">
+        No deje el nombre vacio
+    </div>
+    <% } %>
+
+    <% if (msg.equals("tamanovacio")) { %>
+    <div class="alert alert-danger" role="alert">
+        No deje el tamaño vacio
+    </div>
+    <% } %>
+
+    <% if (msg.equals("poblacionVacia")) { %>
+    <div class="alert alert-danger" role="alert">
+        No deje la poblacion vacia
+    </div>
+    <% } %>
+
+    <% if (msg.equals("continentevacio")) { %>
+    <div class="alert alert-danger" role="alert">
+        No deje el continente vacio
+    </div>
+    <% } %>
+
+    <% if (msg.equals("corr")) { %>
+    <div class="alert alert-success" role="alert">
+        Creacion de pais exitoso
+    </div>
+    <% } %>
 
     <div class="mt-2 text-center">
         <h1>Lista de Participantes</h1>

@@ -30,7 +30,6 @@ public class AlumnoServlet extends HttpServlet {
                 alumnoDao.editarCondicion(idAlumnoEditar);
                 response.sendRedirect(request.getContextPath()+"/UniversidadServlet");
                 break;
-
             case "crear":
 
 

@@ -15,10 +15,12 @@ public class PaisServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PaisDao paisDao = new PaisDao();
         String action = request.getParameter("action") == null ? "listar" : request.getParameter("action");
+        String msg = request.getParameter("msg") == null ?  "" : request.getParameter("msg");
         RequestDispatcher view;
         switch (action){
             case "listar":
                 request.setAttribute("listaPaises",paisDao.listarPaises());
+                request.setAttribute("msg",msg);
                 view = request.getRequestDispatcher("/paises.jsp");
                 view.forward(request, response);
                 break;
@@ -67,12 +69,29 @@ public class PaisServlet extends HttpServlet {
                 response.sendRedirect(request.getContextPath()+"/PaisServlet");
                 break;
             case "crear":
-                String nombreAgregar = request.getParameter("nombrePais");
-                int idContinente = Integer.parseInt(request.getParameter("continente"));
-                int poblacionAgregar = Integer.parseInt(request.getParameter("poblacion"));
-                String tamanoAgregar = request.getParameter("tamano");
-                paisDao.añadirPais(nombreAgregar,poblacionAgregar,tamanoAgregar,idContinente);
-                response.sendRedirect(request.getContextPath()+"/PaisServlet");
+                String nombreAgregar = request.getParameter("nombrePais").equals("") ? null: request.getParameter("nombrePais");
+                int idContinente = request.getParameter("continente").equals("") ? 0 : Integer.parseInt(request.getParameter("continente"));
+                int poblacionAgregar = request.getParameter("poblacion").equals("")? -1 : Integer.parseInt(request.getParameter("poblacion"));
+                String tamanoAgregar = request.getParameter("tamano").equals("") ? null : request.getParameter("tamano");
+
+                if (nombreAgregar != null ){
+                    if (idContinente != 0){
+                        if (poblacionAgregar != -1 ){
+                            if (tamanoAgregar != null){
+                                paisDao.añadirPais(nombreAgregar,poblacionAgregar,tamanoAgregar,idContinente);
+                                response.sendRedirect(request.getContextPath()+"/PaisServlet?msg=corr");
+                            }else{
+                                response.sendRedirect(request.getContextPath() +"/PaisServlet?msg=tamanovacio");
+                            }
+                        }else {
+                            response.sendRedirect(request.getContextPath() +"/PaisServlet?msg=poblacionVacia");
+                        }
+                    }else{
+                        response.sendRedirect(request.getContextPath() +"/PaisServlet?msg=continentevacio");
+                    }
+                }else{
+                    response.sendRedirect(request.getContextPath() +"/PaisServlet?msg=nombrevacio");
+                }
                 break;
         }
     }
