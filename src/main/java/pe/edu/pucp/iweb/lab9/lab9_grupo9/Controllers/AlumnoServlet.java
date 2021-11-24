@@ -15,6 +15,7 @@ public class AlumnoServlet extends HttpServlet {
         String accion = request.getParameter("action") == null ?  "mostrar": request.getParameter("action");
         RequestDispatcher view;
         AlumnoDao alumnoDao = new AlumnoDao();
+        ParticipanteDao participanteDao = new ParticipanteDao();
         switch (accion){
             case "mostrar":
                 String idUniversidadStr = request.getParameter("id");
@@ -50,13 +51,11 @@ public class AlumnoServlet extends HttpServlet {
                         break;
                     case "eliminado":
                         alumnoDao.borrarAlumno(idAlumnoEditar);
-                        ParticipanteDao participanteDao = new ParticipanteDao();
                         participanteDao.borrarParticipante(Integer.parseInt(idAlumnoEditar));
                         response.sendRedirect(request.getContextPath()+"/UniversidadServlet");
                         break;
                     case "Eliminado":
                         alumnoDao.borrarAlumno(idAlumnoEditar);
-                        ParticipanteDao participanteDao = new ParticipanteDao();
                         participanteDao.borrarParticipante(Integer.parseInt(idAlumnoEditar));
                         response.sendRedirect(request.getContextPath()+"/UniversidadServlet");
                         break;
