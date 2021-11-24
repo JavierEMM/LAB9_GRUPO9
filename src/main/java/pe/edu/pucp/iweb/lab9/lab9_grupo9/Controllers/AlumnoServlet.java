@@ -44,7 +44,17 @@ public class AlumnoServlet extends HttpServlet {
                         alumnoDao.editarCondicion(idAlumnoEditar);
                         response.sendRedirect(request.getContextPath()+"/UniversidadServlet");
                         break;
+                    case "Normal":
+                        alumnoDao.editarCondicion(idAlumnoEditar);
+                        response.sendRedirect(request.getContextPath()+"/UniversidadServlet");
+                        break;
                     case "eliminado":
+                        alumnoDao.borrarAlumno(idAlumnoEditar);
+                        ParticipanteDao participanteDao = new ParticipanteDao();
+                        participanteDao.borrarParticipante(Integer.parseInt(idAlumnoEditar));
+                        response.sendRedirect(request.getContextPath()+"/UniversidadServlet");
+                        break;
+                    case "Eliminado":
                         alumnoDao.borrarAlumno(idAlumnoEditar);
                         ParticipanteDao participanteDao = new ParticipanteDao();
                         participanteDao.borrarParticipante(Integer.parseInt(idAlumnoEditar));

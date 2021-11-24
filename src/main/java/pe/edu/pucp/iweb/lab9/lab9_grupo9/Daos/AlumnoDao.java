@@ -65,7 +65,7 @@ public class AlumnoDao extends  BaseDao {
         try(Connection conn = this.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(sql);
         ){
-            pstmt.setString(1,"eliminado");
+            pstmt.setString(1,"Eliminado");
             pstmt.setString(2,idParticipante);
             pstmt.executeUpdate();
         }catch (SQLException e){
