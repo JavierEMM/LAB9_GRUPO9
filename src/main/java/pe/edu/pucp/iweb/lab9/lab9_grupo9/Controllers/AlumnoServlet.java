@@ -37,7 +37,8 @@ public class AlumnoServlet extends HttpServlet {
                 break;
             case "borrar":
                 String idAlumnoEditar = request.getParameter("id");
-                String condicion = request.getParameter("condition");
+                String condicion = request.getParameter("condicion");
+                System.out.println(condicion);
                 switch (condicion){
                     case "normal":
                         alumnoDao.editarCondicion(idAlumnoEditar);
@@ -52,7 +53,6 @@ public class AlumnoServlet extends HttpServlet {
                 }
                 break;
         }
-
     }
 
     @Override
