@@ -4,7 +4,8 @@
 <%@ page import="pe.edu.pucp.iweb.lab9.lab9_grupo9.Daos.ContinenteDao" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="mensaje" scope="request" type="java.lang.String" class="java.lang.String"/>
-<% ArrayList<Pais> listaPaises = (ArrayList<Pais>) request.getAttribute("listaPaises");
+<%
+    ArrayList<Pais> listaPaises = (ArrayList<Pais>) request.getAttribute("listaPaises");
     String msg = (String) request.getAttribute("msg");
 %>
 
@@ -83,6 +84,7 @@
                         %>
                         <label for="continente">Continentes</label>
                         <select id="continente" name="continente" class="form-control">
+                            <option disabled selected >Seleccionar</option>
                             <%for (Continente continente:listacontinentes){%>
                             <option value="<%=continente.getIdcontinente()%>" >
                                 <%=continente.getNombre()%>
