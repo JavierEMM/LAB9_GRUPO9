@@ -42,6 +42,10 @@
     <div class="alert alert-success" role="alert">
         Creacion de universidad exitosa
     </div>
+    <% } %>    <% if (msg.equalsIgnoreCase("borrex")) { %>
+    <div class="alert alert-success" role="alert">
+        Borrado de universidad exitosa
+    </div>
     <% } %>
     <% if (msg.equalsIgnoreCase("edcorr")) { %>
     <div class="alert alert-success" role="alert">

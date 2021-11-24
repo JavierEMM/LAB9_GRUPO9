@@ -64,7 +64,13 @@ public class UniversidadServlet extends HttpServlet {
                 break;
             //BORRAR LOGICO O BORRAR BASE DE DATOS
             case "borrar":
-                String idParticipante2 = request.getParameter("id");
+                try {
+                    universidadDao.borrarUniversidad(Integer.parseInt(idUniversidad));
+                    response.sendRedirect(request.getContextPath()+"/UniversidadServlet?msg=borrex");
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    response.sendRedirect(request.getContextPath()+"/UniversidadServlet?msg=sql");
+                }
                 break;
 
         }

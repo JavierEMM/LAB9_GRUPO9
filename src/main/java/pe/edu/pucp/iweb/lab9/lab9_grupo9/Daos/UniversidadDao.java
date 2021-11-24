@@ -100,10 +100,16 @@ public class UniversidadDao extends BaseDao{
         String sql = "DELETE FROM universidad WHERE (iduniversidad = ?);";
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            String sql2="DELETE FROM alumno WHERE universidad_iduniversidad = ?";
+            try(PreparedStatement pstmt2 = conn.prepareStatement(sql2)){
+                pstmt2.setInt(1,id);
+                pstmt2.executeUpdate();
+            }
             pstmt.setInt(1,id);
             pstmt.executeUpdate();
         }
     }
+
     public void crearUniversidad(String nombre, int ranking,String foto,int idPais) throws SQLException{
         String sql = "INSERT INTO universidad (nombre, ranking, foto, pais_idpais) VALUES (?,?,?,?);";
         try (Connection conn = this.getConnection();
